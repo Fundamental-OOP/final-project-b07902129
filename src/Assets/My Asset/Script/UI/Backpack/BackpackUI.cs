@@ -6,7 +6,9 @@ public class BackpackUI : ACanvas
 {
     // Start is called before the first frame update
     void Awake() {
-        gameObject.SetActive(false);
+        canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        canvasGroup.interactable = false;
+        canvasGroup.alpha = 0.0f;
     }
 
     void Start()
@@ -17,6 +19,6 @@ public class BackpackUI : ACanvas
     // Update is called once per frame
     void Update()
     {
-
+        fade();
     }
 }

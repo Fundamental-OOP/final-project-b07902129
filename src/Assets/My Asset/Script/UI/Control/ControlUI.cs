@@ -5,34 +5,42 @@ using UnityEngine.UI;
 
 public class ControlUI : ACanvas
 {
-    public GameObject characterGameObject;
-    private AButton left;
-    private AButton right;
-    private AButton jump;
-    private MainCharacterMovement mainCharacter;
+    private AButton pauseButton;
+    private AButton backpackButton;
+
+    public Canvas backpackUI;
+    public Canvas pauseUI;
+
+    private ACanvas backpackACanvas;
+    private ACanvas pauseACanvas;
 
     void Awake() {
-        mainCharacter = characterGameObject.GetComponent<MainCharacterMovement>();
-        left = gameObject.transform.Find("left").gameObject.GetComponent<AButton>();
-        right = gameObject.transform.Find("right").gameObject.GetComponent<AButton>();
-        jump = gameObject.transform.Find("jump").gameObject.GetComponent<AButton>();
+        canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        setInteractable(true);
+        setDesireAlpha(1.0f);
+        pauseButton = gameObject.transform.Find("pause").gameObject.GetComponent<AButton>();
+        backpackButton = gameObject.transform.Find("backpack").gameObject.GetComponent<AButton>();
+        pauseACanvas = pauseUI.GetComponent<ACanvas>();
+        backpackACanvas = backpackUI.GetComponent<ACanvas>();
     }
 
     void Update() {
-        UpdateCharacterMovement();
+        checkBackpack();
+        checkPause();
+        fade();
     }
 
-    void UpdateCharacterMovement() {
-        mainCharacter.setJumping(jump.isPressed());
-        if (left.isPressed()) {
-            mainCharacter.setWalking(true);
-            mainCharacter.setLifeformDirection(LifeformMovement.LIFEFORM_FACING.LIFEFORM_FACING_LEFT);
+    private void checkPause() {
+        if (pauseButton.isPressed()) {
+            pauseCanvas();
+            pauseACanvas.activateCanvas();
         }
-        else if (right.isPressed()) {
-            mainCharacter.setWalking(true);
-            mainCharacter.setLifeformDirection(LifeformMovement.LIFEFORM_FACING.LIFEFORM_FACING_RIGHT);
+    }
+
+    private void checkBackpack() {
+        if (backpackButton.isPressed()) {
+            pauseCanvas();
+            backpackACanvas.activateCanvas();
         }
-        else
-            mainCharacter.setWalking(false);
     }
 }
