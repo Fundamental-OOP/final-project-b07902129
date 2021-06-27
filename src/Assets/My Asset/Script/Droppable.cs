@@ -20,8 +20,9 @@ public class Droppable : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData) {
         Debug.Log("OnDrop");
         if (eventData.pointerDrag != null) {
-            eventData.pointerDrag.GetComponent<Draggable>().SetCorrectDrop(true);
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            //eventData.pointerDrag.GetComponent<Draggable>().SetCorrectDrop(true);
+
+            //eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
         }
     }
 }
