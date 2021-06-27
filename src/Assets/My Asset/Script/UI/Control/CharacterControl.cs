@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ChracterControl : MonoBehaviour{
 
-    public MainCharacter character;
+    public MainCharacterMovement character;
     public MovementButton left;
     public MovementButton right;
 
