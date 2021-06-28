@@ -4,30 +4,31 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    // Start is called before the first frame update
     public List<Slot> SlotList;
-    
-    //public int capacity = 15;
+    public List<Slot> HandSlotList;
     void Start()
     {
-        AddItem(GameObject.Find("bullet"));
-        AddItem(GameObject.Find("crystal"));
-        /*ItemList = new List<Drops>();
-        for(int i = 0; i < capacity; i++)
-        {
-            ItemList.Add(null);
-        }*/
+        //AddItem(GameObject.Find("bullet"));
+        //AddItem(GameObject.Find("crystal"));
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
-    bool AddItem(GameObject item)
+    public bool AddItem(GameObject item)
     {
-        for(int i = 0; i <  SlotList.Count;i++)
+        for (int i = 0; i < HandSlotList.Count; i++)
+        {
+            if (HandSlotList[i].IsEmpty())
+            {
+                HandSlotList[i].SetItem(item);
+                return true;
+            }
+        }
+
+        for (int i = 0; i <  SlotList.Count;i++)
         {
             if(SlotList[i].IsEmpty())
             {
@@ -35,7 +36,19 @@ public class Inventory : MonoBehaviour
                 return true;
             }
         }
+
         Debug.Log("inventory full");
+        return false;
+    }
+
+    public bool InHand(string tag)
+    {
+        foreach(Slot s in  HandSlotList){
+            if(s.GetItem() !=null && s.GetItem().tag.Equals(tag))
+            {
+                return true;
+            }
+        }
         return false;
     }
 

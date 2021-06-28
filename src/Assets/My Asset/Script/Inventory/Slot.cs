@@ -23,9 +23,16 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         item.transform.SetParent(gameObject.transform); 
         gameObject.GetComponent<Draggable>().enabled = true;
+        item.SetActive(false); // enter inventory disActives Object
         this.item = item;
         SetSprite(item.GetComponent<Drops>().sprite);
     }
+
+    public GameObject GetItem()
+    {
+        return item;
+    }
+
     public void SetItemEmpty()
     {
         item = null;
@@ -38,6 +45,9 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         return item == null ? true : false;
     }
+
+
+
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDrop" + gameObject.name);

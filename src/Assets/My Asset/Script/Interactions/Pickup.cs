@@ -4,14 +4,22 @@ using UnityEngine;
 using LifeForm;
 namespace Interactions
 {
-    public class Pickup : Interaction
+    [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(Drops))]
+    public class Pickup : AInteraction
     {
-        ///public Player player;
-        ///public double pickupRange = 0.5;
-        public float timeLeft = 5;
 
-        void Update()
+        public float timeLeft = 500;
+        private bool trigger;
+        Inventory inventory;
+        void Awake()
         {
+            trigger = false;
+            inventory = GameObject.Find("MainCharacter").GetComponent<Inventory>();
+        }
+        new void Update()
+        {
+            base.Update();
             timeLeft -= Time.deltaTime;
             if (timeLeft < 0)
             {
@@ -23,11 +31,32 @@ namespace Interactions
         {
             Pick();
         }
+        public override bool Trigger()
+        {
+            if (trigger)
+            {
+                trigger = false;
+                return true;
+            }
+            return false;
+        }
+
+        void  OnTriggerEnter2D(Collider2D col)
+        {
+            Debug.Log("enter collision");
+            if (ColliderIsPlayer(col))
+            {
+                trigger = true;
+            }
+        }
 
         void Pick()
         {
-            Debug.Log("pickup!");
-            Destroy(gameObject);
+            if (inventory.AddItem(gameObject))
+            {
+                Debug.Log("pickup!");
+            }
+
         }
     }
 }

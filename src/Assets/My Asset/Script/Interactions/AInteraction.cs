@@ -5,32 +5,21 @@ using LifeForm;
 
 namespace Interactions
 {
-    public class Interaction : MonoBehaviour
+    public abstract class AInteraction : MonoBehaviour
     {
-        public Player player;
-
-        
-
-        public virtual void Interact()
+        public void Update()
         {
-
-        }
-
-        void OnCollisionEnter2D(Collision2D col)
-        {
-            Debug.Log("col");
-            if (col.gameObject.GetComponent<Player>())
+            if (Trigger())
             {
                 Interact();
             }
         }
+        public abstract bool Trigger();
+        public abstract void Interact();
 
-        void OnCollisionExit2D(Collision2D col)
-        {
-            if (col.gameObject.GetComponent<Player>())
-            {
-                
-            }
+        public bool ColliderIsPlayer(Collider2D col)
+        { 
+            return (col.gameObject.name.Equals("MainCharacter"));
         }
 
         /*void OnMouseDown()
