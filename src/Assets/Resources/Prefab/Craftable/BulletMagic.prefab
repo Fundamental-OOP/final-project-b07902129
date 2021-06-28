@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1899194170316178170}
   - component: {fileID: 1899194170316178167}
   m_Layer: 0
-  m_Name: MD_Attack
+  m_Name: BulletMagic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

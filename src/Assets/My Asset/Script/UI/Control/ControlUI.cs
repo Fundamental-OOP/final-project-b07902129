@@ -5,20 +5,42 @@ using UnityEngine.UI;
 
 public class ControlUI : ACanvas
 {
-    public GameObject character;
-    private GameObject left;
-    private GameObject right;
+    private AButton pauseButton;
+    private AButton backpackButton;
+
+    public Canvas backpackUI;
+    public Canvas pauseUI;
+
+    private ACanvas backpackACanvas;
+    private ACanvas pauseACanvas;
 
     void Awake() {
-        left = gameObject.transform.Find("left").gameObject;
-        right = gameObject.transform.Find("right").gameObject;
+        canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        setInteractable(true);
+        setDesireAlpha(1.0f);
+        pauseButton = gameObject.transform.Find("pause").gameObject.GetComponent<AButton>();
+        backpackButton = gameObject.transform.Find("backpack").gameObject.GetComponent<AButton>();
+        pauseACanvas = pauseUI.GetComponent<ACanvas>();
+        backpackACanvas = backpackUI.GetComponent<ACanvas>();
     }
 
     void Update() {
-        UpdateCharacterMovement();
+        checkBackpack();
+        checkPause();
+        fade();
     }
 
-    void UpdateCharacterMovement() {
+    private void checkPause() {
+        if (pauseButton.isPressed()) {
+            pauseCanvas();
+            pauseACanvas.activateCanvas();
+        }
+    }
 
+    private void checkBackpack() {
+        if (backpackButton.isPressed()) {
+            pauseCanvas();
+            backpackACanvas.activateCanvas();
+        }
     }
 }
