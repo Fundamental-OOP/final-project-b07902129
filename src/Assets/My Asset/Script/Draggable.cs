@@ -13,16 +13,18 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     private Vector2 originAnchoredPosition;
 
     bool correctDrop = false;
-
+    GameObject swapItem;
     // Start is called before the first frame update
     void Awake()
     {
+        canvas = GameObject.Find("BackpackUI").GetComponent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
         rectTransform = GetComponent<RectTransform>();
         originAnchoredPosition = rectTransform.anchoredPosition;
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
+        originAnchoredPosition = rectTransform.anchoredPosition;
         canvasGroup.blocksRaycasts = false;
         Debug.Log("OnBeginDrag");
     }
@@ -30,10 +32,19 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     public void OnEndDrag(PointerEventData eventData) {
         Debug.Log("OnEndDrag");
         canvasGroup.blocksRaycasts = true;
-        if (correctDrop == false)
-            rectTransform.anchoredPosition = originAnchoredPosition;
-        else
-            originAnchoredPosition = rectTransform.anchoredPosition;
+        rectTransform.anchoredPosition = originAnchoredPosition;
+        if (correctDrop == true)
+        {
+            if (swapItem != null)
+            {
+                this.gameObject.GetComponent<Slot>().SetItem(swapItem);
+            }
+            else
+            {
+                this.gameObject.GetComponent<Slot>().SetItemEmpty();
+            }
+        }
+        
         correctDrop = false;
     }
 
@@ -46,8 +57,11 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
         Debug.Log("OnPointerDown");
     }
 
-    public void SetCorrectDrop(bool status) {
-        correctDrop = status;
+    public void SetCorrectDrop(GameObject item) {
+        swapItem = item;
+        correctDrop = true;
     }
+
+    
 
 }
