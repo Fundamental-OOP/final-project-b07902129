@@ -6,6 +6,12 @@ using UnityEngine.UI;
 public class PauseUI : ACanvas
 {
     void Awake() {
-        gameObject.SetActive(false);
+        canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        canvasGroup.interactable = false;
+        canvasGroup.alpha = 0.0f;
+    }
+
+    void Update() {
+        fade();
     }
 }
