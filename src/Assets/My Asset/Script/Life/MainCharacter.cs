@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class MainCharacter : Lifeform
 {
-    override public void useEquippedDrop(int id) {
-        equippedDrops[id].GetComponent<Drops>().use();
+    override public void UseEquippedDrop(int id) {
+        equippedDrops[id].GetComponent<Drops>().Use();
     }
 
-    public override void setEquippedDrop(GameObject drop, int id) {
+    public override void SetEquippedDrop(GameObject drop, int id) {
         equippedDrops[id] = drop;
     }
 }

@@ -8,20 +8,34 @@ public class Slot : MonoBehaviour, IDropHandler
 {
     Image image;
     GameObject item;
-    GameObject slotObject; 
+    GameObject slotObject;
+    Color transparent;
+    Color nonTransparent;
     void Awake()
     {
         item = null;
         gameObject.GetComponent<Draggable>().enabled = false;
-    } 
+        image = gameObject.GetComponent<Image>();
+        transparent = new Color(1f, 1f, 1f, 0f);
+        nonTransparent = new Color(1f, 1f, 1f, 1f);
+        SetImageColor();
+    }
+
+    private void SetImageColor() {
+        if (image.sprite == null)
+            image.color = transparent;
+        else
+            image.color = nonTransparent;
+    }
 
     public void SetSprite(Sprite sprite)
     {
-        gameObject.GetComponent<Image>().sprite = sprite;
+        image.sprite = sprite;
+        SetImageColor();
     }
     public void SetItem(GameObject item)
     {
-        item.transform.SetParent(gameObject.transform); 
+        item.transform.SetParent(gameObject.transform);
         gameObject.GetComponent<Draggable>().enabled = true;
         this.item = item;
         SetSprite(item.GetComponent<Drops>().sprite);
@@ -61,7 +75,7 @@ public class Slot : MonoBehaviour, IDropHandler
                 if (draggedItem != null)
                 {
                     // swap two slots' content
-                    
+
                     eventData.pointerDrag.GetComponent<Draggable>().SetCorrectDrop(this.item);
                     SetItem(draggedItem);
                 }
@@ -70,7 +84,7 @@ public class Slot : MonoBehaviour, IDropHandler
             {
                 Debug.Log("OnDrop dragged item count wrong");
             }
-          
+
         }
     }
 }

@@ -9,5 +9,5 @@ abstract public class AButton : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     public abstract void onClick();
     public abstract void OnPointerDown(PointerEventData data);
     public abstract void OnPointerUp(PointerEventData data);
-    public bool isPressed() { return pressed; }
+    public bool IsPressed() { return pressed; }
 }

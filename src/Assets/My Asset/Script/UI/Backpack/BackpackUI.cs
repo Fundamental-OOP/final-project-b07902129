@@ -4,21 +4,36 @@ using UnityEngine;
 
 public class BackpackUI : ACanvas
 {
-    // Start is called before the first frame update
+    public AButton pauseButton;
+    public AButton backpackButton;
+
+    public ACanvas controlUI;
+    public ACanvas pauseUI;
+    public ACanvas usableSlotUI;
+
     void Awake() {
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
         canvasGroup.interactable = false;
         canvasGroup.alpha = 0.0f;
     }
 
-    void Start()
-    {
-
+    void Update() {
+        Fade();
+        CheckPause();
+        CheckBackpack();
+    }
+    private void CheckPause() {
+        if (pauseButton.IsPressed()) {
+            PauseCanvas();
+            usableSlotUI.PauseCanvas();
+            pauseUI.ActivateCanvas();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        fade();
+    private void CheckBackpack() {
+        if (backpackButton.IsPressed()) {
+            PauseCanvas();
+            controlUI.ActivateCanvas();
+        }
     }
 }

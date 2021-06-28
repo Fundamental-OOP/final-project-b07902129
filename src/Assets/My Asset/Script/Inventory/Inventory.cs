@@ -6,12 +6,14 @@ public class Inventory : MonoBehaviour
 {
     // Start is called before the first frame update
     public List<Slot> SlotList;
-    
+
     //public int capacity = 15;
     void Start()
     {
-        AddItem(GameObject.Find("bullet"));
-        AddItem(GameObject.Find("crystal"));
+        AddItem(GameObject.Find("BulletMagic"));
+        AddItem(GameObject.Find("BulletMagic1"));
+        AddItem(GameObject.Find("BulletMagic2"));
+        AddItem(GameObject.Find("BulletMagic3"));
         /*ItemList = new List<Drops>();
         for(int i = 0; i < capacity; i++)
         {
@@ -22,16 +24,17 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     bool AddItem(GameObject item)
     {
-        for(int i = 0; i <  SlotList.Count;i++)
+        for(int i = 0; i < SlotList.Count; i++)
         {
             if(SlotList[i].IsEmpty())
             {
                 SlotList[i].SetItem(item);
+                item.SetActive(false);
                 return true;
             }
         }

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CraftingTable : MonoBehaviour {
+    public List<Slot> slots;
     private IList<AFormula> formulas;
-    private IList<Slot> slots;
     private AButton craftButton;
     private Dictionary<string, GameObject> craftsPrefabs;
 
     void Awake() {
-        loadFormulas();
+        LoadFormulas();
         craftsPrefabs = new Dictionary<string, GameObject>();
 
         var prefabs = PrefabLoadder.loadAllPrefab("Prefab/Craftable");
@@ -21,58 +21,54 @@ public class CraftingTable : MonoBehaviour {
 
         Debug.Log(string.Format("Prefabs Count: {0}", prefabs.Length));
 
-        slots = new List<Slot>();
-        for (int i = 0; i < 13; i++) {
-            var sl = gameObject.transform.Find("Slot" + i.ToString()).gameObject;
-            Debug.Log(string.Format("Slot {0} {1}", i, sl.name));
-            slots.Add( gameObject.transform.Find("Slot" + i.ToString()).gameObject.GetComponent<Slot>() );
-        }
-
-
         craftButton = gameObject.transform.Find("Craft").gameObject.GetComponent<AButton>();
     }
 
-    private void loadFormulas() {
+    private void LoadFormulas() {
         formulas = new List<AFormula>();
         formulas.Add(new BulletMagicFormula());
     }
 
     void Update() {
-        if (craftButton.isPressed())
-            craft();
+        if (craftButton.IsPressed())
+            Craft();
     }
 
-    private void craft() {
-        int matchedFormula = getMatchedFormula();
+    private void Craft() {
+        int matchedFormula = GetMatchedFormula();
         Debug.Log(string.Format("MatchedFormula: {0}", matchedFormula));
         if (matchedFormula == -1) return;
-        destroyObjectsOnTable();
-        instantiateCraftedObject(matchedFormula);
+        DestroyObjectsOnTable();
+        InstantiateCraftedObject(matchedFormula);
     }
 
-    private int getMatchedFormula() {
+    private int GetMatchedFormula() {
         var onTableObjects = new List<GameObject>();
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < 9; i++) {
             if (slots[i].transform.childCount == 0)
                 onTableObjects.Add(null);
             else if (slots[i].transform.childCount == 1)
                 onTableObjects.Add(slots[i].transform.GetChild(0).gameObject);
         }
         for (int i = 0; i < formulas.Count; i++)
-            if (formulas[i].isMatched(onTableObjects))
+            if (formulas[i].IsMatched(onTableObjects))
                 return i;
         return -1;
     }
 
-    private void destroyObjectsOnTable() {
-        for (int i = 0; i < 13; i++)
-            if (slots[i].transform.childCount == 1)
+    private void DestroyObjectsOnTable() {
+        for (int i = 0; i < 9; i++)
+            if (slots[i].transform.childCount == 1) {
+                slots[i].SetItemEmpty();
                 Destroy(slots[i].transform.GetChild(0).gameObject);
+            }
     }
-    public void instantiateCraftedObject(int formulaID) {
-        var craftedObject = Instantiate(craftsPrefabs[formulas[formulaID].getName()]);
-        craftedObject.transform.position = slots[0].gameObject.transform.position;
-        craftedObject.transform.SetParent(slots[0].gameObject.transform);
+    public void InstantiateCraftedObject(int formulaID) {
+        var craftedObject = Instantiate(craftsPrefabs[formulas[formulaID].GetName()]);
+        // craftedObject.transform.position = slots[0].gameObject.transform.position;
+        // craftedObject.transform.SetParent(slots[0].gameObject.transform);
+        slots[0].SetItem(craftedObject);
+        craftedObject.SetActive(false);
     }
 
 }
