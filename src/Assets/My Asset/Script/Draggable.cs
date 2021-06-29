@@ -17,7 +17,8 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     // Start is called before the first frame update
     void Awake()
     {
-        canvas = GameObject.Find("BackpackUI").GetComponent<Canvas>();
+        canvas = GameObject.Find("ControlUI").GetComponent<Canvas>();
+        //canvas = GameObject.Find("BackpackUI").GetComponent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
         rectTransform = GetComponent<RectTransform>();
         originAnchoredPosition = rectTransform.anchoredPosition;

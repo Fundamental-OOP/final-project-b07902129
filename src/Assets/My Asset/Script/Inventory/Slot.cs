@@ -37,12 +37,14 @@ public class Slot : MonoBehaviour, IDropHandler
     }
     public void SetItem(GameObject item)
     {
-        // item.transform.SetParent(gameObject.transform);
+        //item.transform.SetParent(gameObject.transform);
+        item.SetActive(false); // enter inventory disActives Object
         draggable.enabled = true;
         this.item = item;
         drop = item.GetComponent<Drops>();
         SetSprite(drop.sprite);
     }
+
     public void SetItemEmpty()
     {
         item = null;

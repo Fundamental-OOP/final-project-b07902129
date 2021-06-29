@@ -3,7 +3,7 @@ using UnityEngine;
 abstract public class Lifeform : MonoBehaviour
 {
     protected int lifeformLayer = 6;
-    protected int health;
+    public int health;
     protected GameObject[] equippedDrops = new GameObject[2];
 
     abstract public void UseEquippedDrop(int id);

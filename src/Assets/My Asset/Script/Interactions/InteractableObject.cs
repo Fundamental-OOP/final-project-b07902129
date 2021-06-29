@@ -11,7 +11,7 @@ namespace Interactions
 	public class InteractableObject : MonoBehaviour
 	{
 		public Player player;
-		public Interaction[] interactions;
+		public AInteraction[] interactions;
 		void Start()
 		{
 			player = GameObject.Find("MainCharacter").GetComponent(typeof(Player)) as Player;
