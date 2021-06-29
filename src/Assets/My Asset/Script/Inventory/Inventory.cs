@@ -45,6 +45,7 @@ public class Inventory : MonoBehaviour
         foreach(Slot s in  HandSlotList){
             if(s.GetItem() !=null && s.GetItem().tag.Equals(tag))
             {
+                Debug.Log("Inhand" + s.GetItem().tag + tag);
                 return true;
             }
         }
