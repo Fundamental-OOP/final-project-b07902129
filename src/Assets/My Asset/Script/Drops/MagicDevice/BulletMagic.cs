@@ -1,38 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Experimental.Rendering.Universal;
 
 public class BulletMagic : AMagicDevice
 {
-    public GameObject projectile;
+    private static GameObject projectile;
     private Animator animator;
 
+    private ObjectFollower follower;
+
+    private bool isActivate = false;
+
     void Awake() {
+        projectile = PrefabLoadder.loadPrefab("Prefab/Bullet");
         coolDown = 1.0f;
         animator = GetComponent<Animator>();
+        follower = GetComponent<ObjectFollower>();
         coolDownTimer = coolDown + 1;
     }
 
     void Update() {
-        if (Input.GetMouseButtonDown(0) && coolDownTimer > coolDown) {
-            // animator.SetBool("isAttacking", true);
+        if (Input.GetMouseButtonDown(0) && coolDownTimer > coolDown && isActivate) {
+            if (EventSystem.current.IsPointerOverGameObject(0))
+                Debug.Log("PointerOverGameObject");
+            animator.SetBool("isAttacking", true);
         }
         coolDownTimer += Time.deltaTime;
+        follower.Follow();
     }
 
-    override public void Use() {
-        animator.SetBool("isAttacking", true);
+    override public void SingleUse() {
+        isActivate = !isActivate;
     }
 
-    private void LoadBullet(Vector3 direction, float angle) {
-        GameObject bullet = Instantiate( Resources.Load("Prefab/Bullet", typeof(GameObject)) as GameObject);
+    public override void OnEquipped() {
+        Debug.Log("OnEquipped");
+        follower.InitPosition();
+    }
+
+    private void InstantiateBullet(Vector3 direction, float angle) {
+        GameObject bullet = Instantiate( projectile );
         bullet.GetComponent<AProjectile>().SetDirection(direction);
         bullet.GetComponent<AProjectile>().SetVelocity(2.0f);
         bullet.transform.Rotate(0, 0, angle);
         bullet.transform.position = transform.position;
     }
 
+    // called from animator
     private void Fire() {
         Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         clickPosition.z = 0;
@@ -41,30 +57,10 @@ public class BulletMagic : AMagicDevice
         float angle = Vector3.Angle(Vector3.right, direction);
         if (clickPosition.y < transform.position.y) angle = -angle;
 
-        LoadBullet(direction, angle);
+        InstantiateBullet(direction, angle);
 
         coolDownTimer = 0.0f;
         animator.SetBool("isAttacking", false);
-    }
-
-    private GameObject CreateBulletLight() {
-        GameObject light = new GameObject("Bullet Light");
-        Light2D lightComponent = light.AddComponent<Light2D>();
-        lightComponent.lightType = Light2D.LightType.Point;
-        lightComponent.pointLightInnerRadius = 0;
-        lightComponent.pointLightOuterRadius = .85f;
-        lightComponent.intensity = 3.0f;
-        lightComponent.color = new Color(195, 88, 255, 1);
-        light.transform.position = transform.position;
-        return light;
-    }
-
-    private GameObject CloneBullet(Vector3 direction, float angle) {
-        GameObject clone = Instantiate(projectile, transform.position, transform.rotation);
-        clone.GetComponent<AProjectile>().SetDirection(direction);
-        clone.GetComponent<AProjectile>().SetVelocity(1.0f);
-        clone.transform.Rotate(0, 0, angle);
-        return clone;
     }
 
 }
