@@ -115,7 +115,7 @@ PrefabInstance:
     - target: {fileID: 6188455834806291827, guid: 1b86b3c28fb390345af9ed959524ac65,
         type: 3}
       propertyPath: m_Name
-      value: Slot
+      value: Craft Slot
       objectReference: {fileID: 0}
     - target: {fileID: 7578742940329793195, guid: 1b86b3c28fb390345af9ed959524ac65,
         type: 3}
@@ -137,5 +137,6 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.7607843
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7778221082686852761, guid: 1b86b3c28fb390345af9ed959524ac65, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1b86b3c28fb390345af9ed959524ac65, type: 3}

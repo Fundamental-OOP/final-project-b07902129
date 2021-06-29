@@ -45,10 +45,10 @@ public class CraftingTable : MonoBehaviour {
     private int GetMatchedFormula() {
         var onTableObjects = new List<GameObject>();
         for (int i = 0; i < 9; i++) {
-            if (slots[i].transform.childCount == 0)
+            if (slots[i].IsEmpty())
                 onTableObjects.Add(null);
-            else if (slots[i].transform.childCount == 1)
-                onTableObjects.Add(slots[i].transform.GetChild(0).gameObject);
+            else
+                onTableObjects.Add(slots[i].GetItem());
         }
         for (int i = 0; i < formulas.Count; i++)
             if (formulas[i].IsMatched(onTableObjects))
@@ -58,9 +58,8 @@ public class CraftingTable : MonoBehaviour {
 
     private void DestroyObjectsOnTable() {
         for (int i = 0; i < 9; i++)
-            if (slots[i].transform.childCount == 1) {
-                slots[i].SetItemEmpty();
-                Destroy(slots[i].transform.GetChild(0).gameObject);
+            if (!slots[i].IsEmpty()) {
+                slots[i].DestroyItem();
             }
     }
     public void InstantiateCraftedObject(int formulaID) {

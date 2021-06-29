@@ -7,8 +7,23 @@ public class Drops : MonoBehaviour
     {
         this.sprite = sprite;
     }
-    public virtual void Use()
-    {
-        Debug.Log("using" + gameObject.name);
+    public Sprite GetSprite() {
+        return sprite;
     }
+
+    // fire once when usableslot is pressed
+    public virtual void SingleUse() {
+        Debug.Log("Single use" + gameObject.name);
+    }
+
+    // fire when usableslot is hold
+    public virtual void HoldUse() {
+        Debug.Log("Hold use" + gameObject.name);
+    }
+
+    // initailzation when equipped
+    public virtual void OnEquipped() {}
+
+    // passive ability called every update
+    public virtual void Passive() {}
 }

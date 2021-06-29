@@ -6,22 +6,24 @@ using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour, IDropHandler
 {
-    Image image;
-    GameObject item;
-    GameObject slotObject;
-    Color transparent;
-    Color nonTransparent;
+    protected Image image;
+    protected GameObject item;
+    protected Drops drop;
+    protected Color transparent;
+    protected Color nonTransparent;
+    protected Draggable draggable;
     void Awake()
     {
         item = null;
-        gameObject.GetComponent<Draggable>().enabled = false;
+        draggable = GetComponent<Draggable>();
+        draggable.enabled = false;
         image = gameObject.GetComponent<Image>();
         transparent = new Color(1f, 1f, 1f, 0f);
         nonTransparent = new Color(1f, 1f, 1f, 1f);
         SetImageColor();
     }
 
-    private void SetImageColor() {
+    protected void SetImageColor() {
         if (image.sprite == null)
             image.color = transparent;
         else
@@ -35,24 +37,24 @@ public class Slot : MonoBehaviour, IDropHandler
     }
     public void SetItem(GameObject item)
     {
-        item.transform.SetParent(gameObject.transform);
-        gameObject.GetComponent<Draggable>().enabled = true;
+        //item.transform.SetParent(gameObject.transform);
         item.SetActive(false); // enter inventory disActives Object
+        draggable.enabled = true;
         this.item = item;
-        SetSprite(item.GetComponent<Drops>().sprite);
-    }
-
-    public GameObject GetItem()
-    {
-        return item;
+        drop = item.GetComponent<Drops>();
+        SetSprite(drop.sprite);
     }
 
     public void SetItemEmpty()
     {
         item = null;
         SetSprite(null);
-        gameObject.GetComponent<Draggable>().enabled = false;
-        //slotObject.SetActive(false);
+        draggable.enabled = false;
+    }
+
+    public void DestroyItem() {
+        Destroy(item);
+        SetItemEmpty();
     }
 
     public bool IsEmpty()
@@ -60,41 +62,44 @@ public class Slot : MonoBehaviour, IDropHandler
         return item == null ? true : false;
     }
 
+    public GameObject GetItem() {
+        return item;
+    }
 
+    public Drops GetDrops() {
+        return drop;
+    }
+
+    public Draggable GetDraggable() {
+        return draggable;
+    }
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("OnDrop" + gameObject.name);
-        if (eventData.pointerDrag != null)
-        {
-            if(eventData.pointerDrag == gameObject)
-            {
-                Debug.Log("Drop to self");
-                return;
-            }
-            if(eventData.pointerDrag.GetComponent<Slot>() == null)
-            {
-                Debug.Log("not correct source");
-                return;
-            }
-            Debug.Log(eventData.pointerDrag.name);
-            GameObject sourceSlot = eventData.pointerDrag;
-            if (sourceSlot.transform.childCount == 1)
-            {
-                GameObject draggedItem = sourceSlot.transform.GetChild(0).gameObject;
-                if (draggedItem != null)
-                {
-                    // swap two slots' content
+        // Debug.Log("OnDrop" + gameObject.name);
+        if (eventData.pointerDrag == null) return;
 
-                    eventData.pointerDrag.GetComponent<Draggable>().SetCorrectDrop(this.item);
-                    SetItem(draggedItem);
-                }
-            }
-            else
-            {
-                Debug.Log("OnDrop dragged item count wrong");
-            }
 
+        if (eventData.pointerDrag == gameObject) {
+            // Debug.Log("Drop to self");
+            return;
         }
+
+        Slot sourceSlot = eventData.pointerDrag.GetComponent<Slot>();
+        if (sourceSlot == null) {
+            // Debug.Log("not correct source");
+            return;
+        }
+
+        // Debug.Log(eventData.pointerDrag.name);
+        if (!sourceSlot.IsEmpty()) {
+            // swap two slots' content
+            sourceSlot.GetDraggable().SetCorrectDrop(this.item);
+            SetItem(sourceSlot.GetItem());
+            item.SetActive(false);
+        }
+
+        OnDropCallBack();
     }
+    protected virtual void OnDropCallBack() {}
 }
