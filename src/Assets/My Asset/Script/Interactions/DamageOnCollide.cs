@@ -15,67 +15,94 @@ namespace Interactions
         public List<string> damageTargetTags; //damage all if empty
 
         private bool collide;
-        private Dictionary<GameObject,float> colliders; //collider as key, last collide time as value
+        private GameObject victim;
+        private Dictionary<GameObject, float> victims; //collider as key, last collide time as value
+        private List<GameObject> colliders; //collider as key, last collide time as value
         void Awake()
         {
-            colliders = new Dictionary<GameObject, float>();
+            victims = new Dictionary<GameObject, float>();
+            colliders = new List<GameObject>();
         }
 
-        public override void Interact() 
+        public override void Interact() //called by trigger or OnCollideEnter
         {
-        }
-
-        public override bool Trigger() // interaction handled in trigger
-        {
-            List<GameObject>  tList = new List<GameObject>(); //temporaryList of damage object;
-            foreach(var collider in colliders)
+            if (victims.ContainsKey(victim))
             {
-                if(Time.time - collider.Value > damageInterval)
+                if (Time.time - victims[victim] > damageInterval)
                 {
-                    tList.Add(collider.Key);
-                }
-            }
-            if(tList.Count != 0)
-            {
-                foreach(GameObject victim  in tList)
-                {
-                    colliders[victim] = Time.time;
                     victim.GetComponent<Lifeform>().AddToHealth(-damageValue);
-                }
-                if (destroyOnCollide)
-                {
-                    gameObject.SetActive(false);
-                }
-            }
-            return false;
-        }
-
-        void OnTriggerEnter2D(Collider2D col)
-        {
-            if(damageTargetTags.Count == 0) // damage all lifeform
-            {
-                if (col.gameObject.GetComponent<Lifeform>()!=null)
-                {
-                    colliders.Add(col.gameObject, Time.time);
+                    victims[victim] = Time.time;
                 }
             }
             else
             {
-                foreach (string targetTag in damageTargetTags)
-                {
-                    if (col.tag.Equals(targetTag))
-                    {
-                        colliders.Add(col.gameObject, Time.time);
-                    }
-                }
+                victims.Add(victim, Time.time);
+                victim.GetComponent<Lifeform>().AddToHealth(-damageValue);
             }
-  
-
         }
 
+        public override bool Trigger()  //direct call interact
+        {
+            for(int i = 0; i <  colliders.Count;i++)
+            {
+                victim = colliders[i];
+                Interact();
+            }
+            return false;
+        }
+
+        bool IsTarget(GameObject collider)
+        {
+            if (damageTargetTags.Count == 0 && collider.GetComponent<Lifeform>() != null)
+            {
+                return true;
+            }
+            foreach (string targetTag in damageTargetTags)
+            {
+                if (collider.tag.Equals(targetTag))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        void OnTriggerEnter2D(Collider2D col)
+        {
+            if (IsTarget(col.gameObject))
+            {
+                if (!colliders.Contains(col.gameObject))
+                {
+                    colliders.Add(col.gameObject);
+                }
+                victim = col.gameObject;
+                Interact();
+            }
+        }
         void OnTriggerExit2D(Collider2D col)
         {
-            if(colliders.ContainsKey(col.gameObject)){
+            if (colliders.Contains(col.gameObject))
+            {
+                colliders.Remove(col.gameObject);
+            }
+        }
+
+
+        void OnCollisionEnter2D(Collision2D col)
+        {
+            if (IsTarget(col.gameObject))
+            {
+                if (!colliders.Contains(col.gameObject))
+                {
+                    colliders.Add(col.gameObject);
+                }
+                victim = col.gameObject;
+                Interact();
+            }
+        }
+        void OnCollisionExit2D(Collision2D col)
+        {
+            if (colliders.Contains(col.gameObject))
+            {
                 colliders.Remove(col.gameObject);
             }
         }
