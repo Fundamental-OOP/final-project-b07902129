@@ -40,7 +40,7 @@ namespace Interactions
                 foreach(GameObject victim  in tList)
                 {
                     colliders[victim] = Time.time;
-                    victim.GetComponent<Lifeform>().addToHealth(-damageValue);
+                    victim.GetComponent<Lifeform>().AddToHealth(-damageValue);
                 }
                 if (destroyOnCollide)
                 {

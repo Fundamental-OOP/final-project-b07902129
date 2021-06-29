@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - MainCharacter
+  - tool
   layers:
   - Default
   - TransparentFX
@@ -11,8 +13,8 @@ TagManager:
   - 
   - Water
   - UI
-  - Lifeform
-  - RigidObjects
+  - InventoryUI
+  - UIbutton
   - 
   - 
   - 
@@ -52,9 +54,6 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 3633568529
-    locked: 0
-  - name: UI background
-    uniqueID: 2130019459
     locked: 0
   - name: UI
     uniqueID: 2325533141
