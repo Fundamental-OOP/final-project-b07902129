@@ -33,7 +33,7 @@ public class BackpackButton : MonoBehaviour
         if (button.gameObject.transform.childCount == 1)
         {
             GameObject item = button.gameObject.transform.GetChild(0).gameObject;
-            item.GetComponent<Drops>().Use();
+            item.GetComponent<Drops>().SingleUse();
         }
         else if (button.gameObject.transform.childCount == 0)
         {

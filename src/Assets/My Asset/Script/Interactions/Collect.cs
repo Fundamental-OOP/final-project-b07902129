@@ -12,7 +12,7 @@ namespace Interactions
         public int dropCount = 1;
         public int hitCount = 5;
         public Dropper dropper;
-        public string[] collectTool ;
+        public List<string> collectTool ;
         private bool collide, click;
         private Color originalColor;
         public void Awake()
@@ -29,14 +29,24 @@ namespace Interactions
         {
             if (collide && click)
             { 
-                foreach(string s in collectTool)
+                if(collectTool.Count == 0) //dont require tool to collect
                 {
-                    if (playerInventory.InHand(s))
+                    click = false;
+                    return true;    
+                }
+                else
+                {
+                    foreach (string s in collectTool)
                     {
-                        click = false;
-                        return true;
+                        if (playerInventory.InHand(s))
+                        {
+               
+                            click = false;
+                            return true;
+                        }
                     }
                 }
+
 
             }
             click = false;
