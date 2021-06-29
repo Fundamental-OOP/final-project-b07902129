@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MainCharacter
   - tool
+  - MagicDevice
   layers:
   - Default
   - TransparentFX
@@ -13,10 +14,10 @@ TagManager:
   - 
   - Water
   - UI
-  - InventoryUI
-  - UIbutton
-  - 
-  - 
+  - MainCharacter
+  - OtherLifeform
+  - Drops
+  - StaticSprite
   - 
   - 
   - 

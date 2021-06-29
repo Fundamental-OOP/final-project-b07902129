@@ -22,6 +22,7 @@ public class Inventory : MonoBehaviour
             if (HandSlotList[i].IsEmpty())
             {
                 HandSlotList[i].SetItem(item);
+                item.SetActive(true);
                 return true;
             }
         }

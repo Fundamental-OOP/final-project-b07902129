@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2032633178129958518}
   m_Layer: 0
   m_Name: BulletMagic
-  m_TagString: Untagged
+  m_TagString: MagicDevice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,6 +120,7 @@ MonoBehaviour:
   offset: {x: -2, y: 3, z: 0}
   speed: 5
   targetDirectionSensitive: 1
+  isActive: 0
 --- !u!114 &2032633178129958518
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -35,7 +35,7 @@ public class Slot : MonoBehaviour, IDropHandler
         image.sprite = sprite;
         SetImageColor();
     }
-    public void SetItem(GameObject item)
+    public virtual void SetItem(GameObject item)
     {
         //item.transform.SetParent(gameObject.transform);
         item.SetActive(false); // enter inventory disActives Object

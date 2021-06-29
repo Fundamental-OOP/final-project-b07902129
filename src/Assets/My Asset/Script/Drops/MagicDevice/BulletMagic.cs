@@ -8,10 +8,8 @@ public class BulletMagic : AMagicDevice
 {
     private static GameObject projectile;
     private Animator animator;
-
     private ObjectFollower follower;
-
-    private bool isActivate = false;
+    private bool isActive = false;
 
     void Awake() {
         projectile = PrefabLoadder.loadPrefab("Prefab/Bullet");
@@ -19,20 +17,20 @@ public class BulletMagic : AMagicDevice
         animator = GetComponent<Animator>();
         follower = GetComponent<ObjectFollower>();
         coolDownTimer = coolDown + 1;
+        requiredLightIntensity = 0.5f;
     }
 
-    void Update() {
-        if (Input.GetMouseButtonDown(0) && coolDownTimer > coolDown && isActivate) {
+    public override void Passive() {
+        if (Input.GetMouseButtonDown(0) && coolDownTimer > coolDown && isActive) {
             if (EventSystem.current.IsPointerOverGameObject(0))
                 Debug.Log("PointerOverGameObject");
             animator.SetBool("isAttacking", true);
         }
         coolDownTimer += Time.deltaTime;
-        follower.Follow();
     }
 
-    override public void SingleUse() {
-        isActivate = !isActivate;
+    public override void SingleUse() {
+        isActive = !isActive;
     }
 
     public override void OnEquipped() {

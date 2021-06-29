@@ -28,7 +28,9 @@ public class Bullet : AProjectile
         transform.position += velocity * Time.deltaTime * direction;
     }
 
-    public void OnCollisionEnter2D(Collision2D collision) {
+    public void OnTriggerEnter2D(Collider2D collider) {
+        if (collider.gameObject.tag == "MainCharacter")
+            return;
         LoadExplosion();
         Destroy(gameObject);
     }
