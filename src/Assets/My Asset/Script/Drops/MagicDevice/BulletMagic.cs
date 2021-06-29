@@ -8,10 +8,6 @@ public class BulletMagic : AMagicDevice
     public GameObject projectile;
     private Animator animator;
 
-    public BulletMagic() {
-        dropName = "BulletMagic";
-    }
-
     void Awake() {
         coolDown = 1.0f;
         animator = GetComponent<Animator>();
@@ -25,11 +21,11 @@ public class BulletMagic : AMagicDevice
         coolDownTimer += Time.deltaTime;
     }
 
-    override public void use() {
+    override public void Use() {
         animator.SetBool("isAttacking", true);
     }
 
-    private void loadBullet(Vector3 direction, float angle) {
+    private void LoadBullet(Vector3 direction, float angle) {
         GameObject bullet = Instantiate( Resources.Load("Prefab/Bullet", typeof(GameObject)) as GameObject);
         bullet.GetComponent<AProjectile>().SetDirection(direction);
         bullet.GetComponent<AProjectile>().SetVelocity(2.0f);
@@ -37,7 +33,7 @@ public class BulletMagic : AMagicDevice
         bullet.transform.position = transform.position;
     }
 
-    private void fire() {
+    private void Fire() {
         Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         clickPosition.z = 0;
         Vector3 direction = Vector3.Normalize(clickPosition - transform.position);
@@ -45,13 +41,13 @@ public class BulletMagic : AMagicDevice
         float angle = Vector3.Angle(Vector3.right, direction);
         if (clickPosition.y < transform.position.y) angle = -angle;
 
-        loadBullet(direction, angle);
+        LoadBullet(direction, angle);
 
         coolDownTimer = 0.0f;
         animator.SetBool("isAttacking", false);
     }
 
-    private GameObject createBulletLight() {
+    private GameObject CreateBulletLight() {
         GameObject light = new GameObject("Bullet Light");
         Light2D lightComponent = light.AddComponent<Light2D>();
         lightComponent.lightType = Light2D.LightType.Point;
@@ -63,7 +59,7 @@ public class BulletMagic : AMagicDevice
         return light;
     }
 
-    private GameObject cloneBullet(Vector3 direction, float angle) {
+    private GameObject CloneBullet(Vector3 direction, float angle) {
         GameObject clone = Instantiate(projectile, transform.position, transform.rotation);
         clone.GetComponent<AProjectile>().SetDirection(direction);
         clone.GetComponent<AProjectile>().SetVelocity(1.0f);

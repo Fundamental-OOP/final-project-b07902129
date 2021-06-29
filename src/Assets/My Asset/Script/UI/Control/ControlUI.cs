@@ -5,42 +5,36 @@ using UnityEngine.UI;
 
 public class ControlUI : ACanvas
 {
-    private AButton pauseButton;
-    private AButton backpackButton;
+    public AButton pauseButton;
+    public AButton backpackButton;
 
-    public Canvas backpackUI;
-    public Canvas pauseUI;
-
-    private ACanvas backpackACanvas;
-    private ACanvas pauseACanvas;
+    public ACanvas backpackUI;
+    public ACanvas pauseUI;
+    public ACanvas usableSlotUI;
 
     void Awake() {
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
-        setInteractable(true);
-        setDesireAlpha(1.0f);
-        pauseButton = gameObject.transform.Find("pause").gameObject.GetComponent<AButton>();
-        backpackButton = gameObject.transform.Find("backpack").gameObject.GetComponent<AButton>();
-        pauseACanvas = pauseUI.GetComponent<ACanvas>();
-        backpackACanvas = backpackUI.GetComponent<ACanvas>();
+        ActivateCanvas();
     }
 
     void Update() {
-        checkBackpack();
-        checkPause();
-        fade();
+        CheckBackpack();
+        CheckPause();
+        Fade();
     }
 
-    private void checkPause() {
-        if (pauseButton.isPressed()) {
-            pauseCanvas();
-            pauseACanvas.activateCanvas();
+    private void CheckPause() {
+        if (pauseButton.IsPressed()) {
+            PauseCanvas();
+            usableSlotUI.PauseCanvas();
+            pauseUI.ActivateCanvas();
         }
     }
 
-    private void checkBackpack() {
-        if (backpackButton.isPressed()) {
-            pauseCanvas();
-            backpackACanvas.activateCanvas();
+    private void CheckBackpack() {
+        if (backpackButton.IsPressed()) {
+            PauseCanvas();
+            backpackUI.ActivateCanvas();
         }
     }
 }

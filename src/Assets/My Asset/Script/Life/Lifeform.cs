@@ -6,11 +6,11 @@ abstract public class Lifeform : MonoBehaviour
     protected int health;
     protected GameObject[] equippedDrops = new GameObject[2];
 
-    abstract public void useEquippedDrop(int id);
+    abstract public void UseEquippedDrop(int id);
 
-    abstract public void setEquippedDrop(GameObject drop, int id);
+    abstract public void SetEquippedDrop(GameObject drop, int id);
 
-    public void addToHealth(int amount) {
+    public void AddToHealth(int amount) {
         health += amount;
     }
 

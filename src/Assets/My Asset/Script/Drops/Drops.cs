@@ -1,6 +1,14 @@
 using UnityEngine;
 
-abstract public class Drops : MonoBehaviour
+public class Drops : MonoBehaviour
 {
-    abstract public void use();
+    public Sprite sprite;
+    public void SetSprite(Sprite sprite)
+    {
+        this.sprite = sprite;
+    }
+    public virtual void Use()
+    {
+        Debug.Log("using" + gameObject.name);
+    }
 }

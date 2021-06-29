@@ -1,13 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class UsableSlot : MonoBehaviour
+public class UsableSlot : AButton
 {
-    // Start is called before the first frame update
+    AButton button;
 
-    // Update is called once per frame
-    void OnMouseDown()
+    void Awake() {
+        button = gameObject.GetComponent<AButton>();
+    }
+
+    public override void onClick() {}
+    public override void OnPointerDown(PointerEventData data) {
+        Use();
+    }
+    public override void OnPointerUp(PointerEventData data) {}
+
+    void Use()
     {
         if(gameObject.transform.childCount == 1)
         {

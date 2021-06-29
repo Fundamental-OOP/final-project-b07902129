@@ -8,13 +8,11 @@ public class Inventory : MonoBehaviour
     public List<Slot> HandSlotList;
     void Start()
     {
-        //AddItem(GameObject.Find("bullet"));
-        //AddItem(GameObject.Find("crystal"));
     }
 
     void Update()
     {
-        
+
     }
 
     public bool AddItem(GameObject item)
@@ -33,6 +31,7 @@ public class Inventory : MonoBehaviour
             if(SlotList[i].IsEmpty())
             {
                 SlotList[i].SetItem(item);
+                item.SetActive(false);
                 return true;
             }
         }
@@ -57,10 +56,6 @@ public class Inventory : MonoBehaviour
         SlotList[index].SetItemEmpty();
     }
 
-    /*void RemoveItem(Drops Item)
-    {
-        ItemList.Remove(Item);
-    }*/
 
     public List<Slot> GetItemList()
     {

@@ -8,31 +8,31 @@ abstract public class ACanvas : MonoBehaviour
     protected float desireAlpha = 0.0f;
     protected float alphaStepPerSec = 1.0f;
 
-    protected void fade() {
-        canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, desireAlpha, Time.deltaTime * alphaStepPerSec);
+    protected void Fade() {
+        canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, desireAlpha, Time.fixedDeltaTime * alphaStepPerSec);
     }
 
-    public void pauseCanvas() {
-        setDesireAlpha(0.0f);
-        setBlockRaycasts(false);
-        setInteractable(false);
+    public void PauseCanvas() {
+        SetDesireAlpha(0.0f);
+        SetBlockRaycasts(false);
+        SetInteractable(false);
     }
 
-    public void activateCanvas() {
-        setDesireAlpha(1.0f);
-        setBlockRaycasts(true);
-        setInteractable(true);
+    public virtual void ActivateCanvas() {
+        SetDesireAlpha(1.0f);
+        SetBlockRaycasts(true);
+        SetInteractable(true);
     }
 
-    public void setDesireAlpha(float alpha) {
+    public void SetDesireAlpha(float alpha) {
         desireAlpha = alpha;
     }
 
-    public void setBlockRaycasts(bool raycasts) {
+    public void SetBlockRaycasts(bool raycasts) {
         canvasGroup.blocksRaycasts = raycasts;
     }
 
-    public void setInteractable(bool interactable) {
+    public void SetInteractable(bool interactable) {
         canvasGroup.interactable = interactable;
     }
 }
