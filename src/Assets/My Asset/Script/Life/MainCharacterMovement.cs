@@ -62,10 +62,10 @@ public class MainCharacterMovement : LifeformMovement
     }
 
     private void checkFacing() {
-        if (currentDirection == LIFEFORM_FACING.LIFEFORM_FACING_LEFT && gameObject.transform.eulerAngles.y == 0)
-            gameObject.transform.eulerAngles = new Vector3(gameObject.transform.rotation.x, 180, gameObject.transform.rotation.z);
-        else if (currentDirection == LIFEFORM_FACING.LIFEFORM_FACING_RIGHT && gameObject.transform.eulerAngles.y == 180)
-            gameObject.transform.eulerAngles = new Vector3(gameObject.transform.rotation.x, 0, gameObject.transform.rotation.z);
+        if ( (currentDirection == LIFEFORM_FACING.LIFEFORM_FACING_LEFT && gameObject.transform.localScale.x > 0) ||
+             (currentDirection == LIFEFORM_FACING.LIFEFORM_FACING_RIGHT && gameObject.transform.localScale.x < 0) )
+            gameObject.transform.localScale = new Vector3(-1 * gameObject.transform.localScale.x,
+                                                            gameObject.transform.localScale.y, gameObject.transform.localScale.z);
     }
 
     private void updateFacing() {
