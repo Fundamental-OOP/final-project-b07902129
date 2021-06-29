@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class MainCharacterMovement : LifeformMovement
 {
+    /*
     private float speed = 3f;
     private float jumpSpeed = 6.5f;
     private float stepHeightOffset = .2f;
     private bool isWalking = false;
     private bool isJumping = false;
     private Animator animator;
-
+    
     void Awake() {
         animator = gameObject.GetComponent<Animator>();
         rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
@@ -94,5 +95,5 @@ public class MainCharacterMovement : LifeformMovement
             }
 
         }
-    }
+    }*/
 }

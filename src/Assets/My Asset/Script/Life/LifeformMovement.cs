@@ -1,6 +1,9 @@
 using UnityEngine;
 
-abstract public class LifeformMovement : MonoBehaviour
+[RequireComponent(typeof(Lifeform))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
+public class LifeformMovement : MonoBehaviour
 {
     public enum LIFEFORM_FACING {
         LIFEFORM_FACING_LEFT,
@@ -12,7 +15,36 @@ abstract public class LifeformMovement : MonoBehaviour
     protected LIFEFORM_FACING currentDirection;
     protected new Rigidbody2D rigidbody2D;
     protected BoxCollider2D boxCollider2D;
-    abstract public Vector3 getPos();
+
+    private float speed = 3f;
+    private float jumpSpeed = 6.5f;
+    private float stepHeightOffset = .2f;
+    private bool isWalking = false;
+    private bool isJumping = false;
+    private Animator animator;
+
+
+
+    void Awake()
+    {
+        animator = gameObject.GetComponent<Animator>();
+        rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        boxCollider2D = gameObject.GetComponent<BoxCollider2D>();
+        currentDirection = LIFEFORM_FACING.LIFEFORM_FACING_RIGHT;
+        rigidbody2D.constraints |= RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    void Update()
+    {
+        checkJump();
+        checkFacing();
+    }
+
+    void FixedUpdate()
+    {
+        checkMovement();
+    }
+
 
     public void setLifeformDirection(LIFEFORM_FACING direction) {
         currentDirection = direction;
@@ -23,6 +55,95 @@ abstract public class LifeformMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(boxCollider2D.bounds.center, Vector2.down, boxCollider2D.bounds.extents.y + isGroundedOffst, mask);
         Debug.DrawRay(boxCollider2D.bounds.center, Vector2.down * boxCollider2D.bounds.extents.y, Color.red, 1);
         return hit.collider != null;
+    }
+
+
+    public void setJumping(bool jump)
+    {
+        isJumping = jump;
+    }
+
+    public void setWalking(bool walk)
+    {
+        isWalking = walk;
+    }
+
+    private void checkMovement()
+    {
+        animator.SetBool("isWalking", isWalking);
+        if (isWalking)
+        {
+            if (currentDirection == LIFEFORM_FACING.LIFEFORM_FACING_LEFT)
+                rigidbody2D.velocity = new Vector2(-speed, rigidbody2D.velocity.y);
+            else if (currentDirection == LIFEFORM_FACING.LIFEFORM_FACING_RIGHT)
+                rigidbody2D.velocity = new Vector2(speed, rigidbody2D.velocity.y);
+        }
+    }
+
+
+    private void checkJump()
+    {
+        Debug.Log(isGrounded());
+        if (isJumping && isGrounded())
+        {
+            animator.SetBool("isJumping", isJumping);
+        }
+    }
+
+    public void endJump()
+    {
+        animator.SetBool("isJumping", false);
+    }
+
+    public void startJump()
+    {
+        rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, jumpSpeed);
+    }
+
+    private void checkFacing()
+    {
+        if ((currentDirection == LIFEFORM_FACING.LIFEFORM_FACING_LEFT && gameObject.transform.localScale.x > 0) ||
+             (currentDirection == LIFEFORM_FACING.LIFEFORM_FACING_RIGHT && gameObject.transform.localScale.x < 0))
+            gameObject.transform.localScale = new Vector3(-1 * gameObject.transform.localScale.x,
+                                                            gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+    }
+
+    private void updateFacing()
+    {
+        switch (currentDirection)
+        {
+            case LIFEFORM_FACING.LIFEFORM_FACING_LEFT:
+                break;
+            case LIFEFORM_FACING.LIFEFORM_FACING_RIGHT:
+                break;
+        }
+    }
+
+    public Vector3 getPos()
+    {
+        return gameObject.transform.position;
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!isWalking)
+            return;
+        for (int i = 0; i < collision.contactCount; i++)
+        {
+            ContactPoint2D contactPoint = collision.GetContact(i);
+            if (contactPoint.point.y < (boxCollider2D.bounds.center.y - boxCollider2D.bounds.extents.y + stepHeightOffset))
+            {
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x,
+                                                            contactPoint.point.y + boxCollider2D.bounds.extents.y + stepHeightOffset,
+                                                            gameObject.transform.position.z);
+                return;
+            }
+
+        }
+    }
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
     }
 
 }
