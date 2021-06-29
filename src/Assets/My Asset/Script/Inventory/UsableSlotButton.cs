@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class UsableSlotButton : AButton
 {
+    public LightIntensityDetector lightIntensityDetector;
     AButton button;
     Slot slot;
 
@@ -14,14 +15,38 @@ public class UsableSlotButton : AButton
     }
 
     void Update() {
-        if (IsPressed()) {
+        if (slot.IsEmpty()) return;
+
+        if (IsMagicDevice() && !passLightIntensity()) return;
+
+        slot.GetDrops().Passive();
+        if (IsPressed())
             HoldUse();
-        }
+    }
+
+    void FixedUpdate() {
+        if (slot.IsEmpty()) return;
+        if (IsMagicDevice())
+            lightIntensityDetector.transform.position = slot.GetItem().transform.position;
     }
 
     public override void onClick() {}
     public override void OnPointerDown(PointerEventData data) {
+        if (IsMagicDevice() && !passLightIntensity()) return;
         SingleUse();
+    }
+
+    protected bool IsMagicDevice() {
+        return slot.GetItem().tag == "MagicDevice" ? true : false;
+    }
+
+    protected bool passLightIntensity() {
+        float required = slot.GetItem().GetComponent<AMagicDevice>().GetRequiredLightIntensity();
+        float detected = lightIntensityDetector.DetectLightIntensity();
+        Debug.Log(string.Format("Required: {0}, Detected: {1}", required, detected));
+        if (detected < required)
+            return false;
+        return true;
     }
     public override void OnPointerUp(PointerEventData data) {}
 
