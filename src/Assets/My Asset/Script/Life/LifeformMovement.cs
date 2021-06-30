@@ -18,7 +18,7 @@ public class LifeformMovement : MonoBehaviour
 
     private float speed = 3f;
     private float jumpSpeed = 6.5f;
-    private float stepHeightOffset = 0.5f;
+    private float stepHeightOffset = 0.1f;
     private bool isWalking = false;
     private bool isJumping = false;
     private Animator animator;

@@ -14,14 +14,14 @@ public class Potion : Drops
     }
 
     // fire when usableslot is hold
-    public virtual void HoldUse()
+    public override void HoldUse()
     {
         Debug.Log("Hold use" + gameObject.name);
     }
 
     // initailzation when equipped
-    public virtual void OnEquipped() { }
+    public override void OnEquipped() { }
 
     // passive ability called every update
-    public virtual void Passive() { }
+    public override void Passive() { }
 }
