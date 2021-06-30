@@ -16,36 +16,23 @@ namespace Behaviors
         {
 
             points = new List<Vector2>();
-            Transform[] pointsTransform = GetComponentsInChildren<Transform>();
-            foreach (Transform t in pointsTransform)
+            foreach (Transform t in transform) //get children transform
             {
                 points.Add(new Vector2(t.position.x, t.position.y));
             }
-
-            movement = GetComponent<LifeformMovement>();
+            movement = host.GetComponent<LifeformMovement>();
             index = 0;
             target = points[0];
         }
         override public void go()
         {
-            Debug.Log(target.x);
-            if(Vector2.Distance(gameObject.transform.position,target) < 1f)
+            if(Vector2.Distance(host.transform.position,target) < 1f) //close enough
             {
                 NextPoint();
             }
-            if (target.x - gameObject.transform.position.x > 0)
-            {
-                Debug.Log(movement);
-                movement.setLifeformDirection(LifeformMovement.LIFEFORM_FACING.LIFEFORM_FACING_RIGHT);
-                movement.setWalking(true);
-                movement.SetSpeed(speed);
-            }
-            else
-            {
-                movement.setLifeformDirection(LifeformMovement.LIFEFORM_FACING.LIFEFORM_FACING_LEFT);
-                movement.setWalking(true);
-                movement.SetSpeed(speed);
-            }
+            
+            movement.SetSpeed(speed);
+            movement.RelativeMovement(target, true);
         }
 
         private void NextPoint()

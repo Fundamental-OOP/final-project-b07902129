@@ -6,6 +6,8 @@ TagManager:
   tags:
   - MainCharacter
   - tool
+  - Enemy
+  - EnemyProjectile
   - MagicDevice
   layers:
   - Default
@@ -14,11 +16,16 @@ TagManager:
   - 
   - Water
   - UI
+  - Lifeform
+  - 
+=======
   - MainCharacter
   - OtherLifeform
   - Drops
   - StaticSprite
   - 
+  - InventoryUI
+  - UIbutton
   - 
   - 
   - 

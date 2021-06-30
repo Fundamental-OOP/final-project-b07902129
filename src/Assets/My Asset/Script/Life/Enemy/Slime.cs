@@ -7,7 +7,7 @@ namespace Enemies
 {
     public class Slime : Enemy
     {
-        new void Awake()
+        /*new void Awake()
         {
             base.Awake();
             behaviors = new List<ABehavior>();
@@ -18,11 +18,10 @@ namespace Enemies
             behavior = behaviors[0];
         }
 
-        override public void ChooseBehavior()
+        /*override public void ChooseBehavior()
         {
             behavior = behaviors[0]; 
-        }
-
+        }*/
         override public void UseEquippedDrop(int id)
         {
             equippedDrops[id].GetComponent<Drops>().SingleUse();

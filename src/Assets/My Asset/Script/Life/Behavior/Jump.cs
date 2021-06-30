@@ -5,10 +5,9 @@ using UnityEngine;
 
 namespace Behaviors
 {
-    public class AwayObject : ABehavior
+    public class Jump : ABehavior
     {
-        public GameObject target;
-        public float speed = 2f;
+        public float jumpSpeed = 10f;
         private LifeformMovement movement;
         void Awake()
         {
@@ -16,8 +15,9 @@ namespace Behaviors
         }
         override public void go()
         {
-            movement.SetSpeed(speed);
-            movement.RelativeMovement(target.transform.position, false);
+            movement.SetJumpSpeed(jumpSpeed);
+            movement.Jump();
+           
         }
     }
 }

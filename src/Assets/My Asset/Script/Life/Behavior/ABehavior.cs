@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Behaviors 
 {
-    [RequireComponent(typeof(LifeformMovement))]
     abstract public class ABehavior : MonoBehaviour
     {
+        public GameObject host;
         abstract public void go();
     }
 }
