@@ -29,7 +29,7 @@ public class Bullet : AProjectile
     }
 
     public void OnTriggerEnter2D(Collider2D collider) {
-        if (collider.gameObject.tag == "MainCharacter")
+        if (collider.gameObject.tag == "MainCharacter" || collider.gameObject.layer == 8)
             return;
         LoadExplosion();
         Destroy(gameObject);

@@ -8,6 +8,9 @@ public class Inventory : MonoBehaviour
     public List<Slot> HandSlotList;
     void Start()
     {
+        AddItem(GameObject.Find("LightSaver"));
+        AddItem(GameObject.Find("BulletMagic"));
+        AddItem(GameObject.Find("Defense_Circle"));
     }
 
     void Update()

@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class UsableSlot : Slot
 {
+    public LightIntensityDetector lightIntensityDetector;
     public Vector3 objectOffsetFromCharacter;
 
     // drops onEquipped initialization

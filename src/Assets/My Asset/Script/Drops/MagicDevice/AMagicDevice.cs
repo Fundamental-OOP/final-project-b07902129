@@ -8,6 +8,7 @@ abstract public class AMagicDevice : Drops
     protected float coolDown;
     protected float coolDownTimer;
     protected float requiredLightIntensity;
+    protected LightIntensityDetector lid;
 
     public float GetCoolDown() {
         return coolDown;
@@ -19,5 +20,9 @@ abstract public class AMagicDevice : Drops
 
     public float GetRequiredLightIntensity() {
         return requiredLightIntensity;
+    }
+
+    public bool MeetLightIntensity() {
+        return lid.DetectLightIntensity() > requiredLightIntensity;
     }
 }

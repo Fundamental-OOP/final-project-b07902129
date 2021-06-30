@@ -12,6 +12,7 @@ public class BulletMagic : AMagicDevice
     private bool isActive = false;
 
     void Awake() {
+        lid = transform.Find("LightIntensityDetector").gameObject.GetComponent<LightIntensityDetector>();
         projectile = PrefabLoadder.loadPrefab("Prefab/Bullet");
         coolDown = 1.0f;
         animator = GetComponent<Animator>();
@@ -21,7 +22,7 @@ public class BulletMagic : AMagicDevice
     }
 
     public override void Passive() {
-        if (Input.GetMouseButtonDown(0) && coolDownTimer > coolDown && isActive) {
+        if (Input.GetMouseButtonDown(0) && coolDownTimer > coolDown && isActive && MeetLightIntensity()) {
             if (EventSystem.current.IsPointerOverGameObject(0))
                 Debug.Log("PointerOverGameObject");
             animator.SetBool("isAttacking", true);
