@@ -4,12 +4,23 @@ public class ObjectFollower : MonoBehaviour {
     public GameObject target;
     public Vector3 offset;
     public float speed = 5.0f;
-
     public bool targetDirectionSensitive = true;
 
     void Update() {
         AdjustOffsetByTargetDirection();
         Follow();
+    }
+
+    public void SetOffset(Vector3 offset) {
+        this.offset = offset;
+    }
+
+    public void SetSpeed(float speed) {
+        this.speed = speed;
+    }
+
+    public GameObject GetTarget() {
+        return target;
     }
 
     public virtual void Follow() {

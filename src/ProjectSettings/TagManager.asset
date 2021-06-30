@@ -8,6 +8,7 @@ TagManager:
   - tool
   - Enemy
   - EnemyProjectile
+  - MagicDevice
   layers:
   - Default
   - TransparentFX
@@ -17,6 +18,11 @@ TagManager:
   - UI
   - Lifeform
   - 
+=======
+  - MainCharacter
+  - OtherLifeform
+  - Drops
+  - StaticSprite
   - 
   - InventoryUI
   - UIbutton
