@@ -6,9 +6,9 @@ TagManager:
   tags:
   - MainCharacter
   - tool
-  - Enemy
-  - EnemyProjectile
   - MagicDevice
+  - EnemyFire
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -16,16 +16,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Lifeform
-  - 
-=======
   - MainCharacter
   - OtherLifeform
   - Drops
   - StaticSprite
   - 
-  - InventoryUI
-  - UIbutton
   - 
   - 
   - 
@@ -52,20 +47,23 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Background
-    uniqueID: 2278753439
+    uniqueID: 696661469
     locked: 0
   - name: Interactive Objects
-    uniqueID: 2869836269
+    uniqueID: 3636036979
     locked: 0
   - name: Player
-    uniqueID: 390312999
+    uniqueID: 179849633
+    locked: 0
+  - name: Interactive Objects 2
+    uniqueID: 1593607287
     locked: 0
   - name: Foreground
-    uniqueID: 3633568529
+    uniqueID: 4053689349
     locked: 0
-  - name: UI background
-    uniqueID: 1477954747
+  - name: UI Background
+    uniqueID: 1351459661
     locked: 0
   - name: UI
-    uniqueID: 2325533141
+    uniqueID: 2267359243
     locked: 0
