@@ -18,15 +18,16 @@ public class LifeformMovement : MonoBehaviour
 
     private float speed = 3f;
     private float jumpSpeed = 6.5f;
-    private float stepHeightOffset = .2f;
+    private float stepHeightOffset = 0.5f;
     private bool isWalking = false;
     private bool isJumping = false;
     private Animator animator;
-
+    private float jumpApproximate = 2f; // movetowards will start jumping when close enough
 
 
     void Awake()
     {
+        Physics2D.queriesStartInColliders = false;
         animator = gameObject.GetComponent<Animator>();
         rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
         boxCollider2D = gameObject.GetComponent<BoxCollider2D>();
@@ -50,10 +51,12 @@ public class LifeformMovement : MonoBehaviour
         currentDirection = direction;
     }
 
-    protected bool isGrounded() {
-        int mask = ~(1 << lifeformLayer);
+    public bool isGrounded() {
+        int mask = ~(LayerMask.GetMask("Lifeform") | LayerMask.GetMask("Ignore Raycast"));
         RaycastHit2D hit = Physics2D.Raycast(boxCollider2D.bounds.center, Vector2.down, boxCollider2D.bounds.extents.y + isGroundedOffst, mask);
         Debug.DrawRay(boxCollider2D.bounds.center, Vector2.down * boxCollider2D.bounds.extents.y, Color.red, 1);
+        //if (hit.collider != null)
+         //   Debug.Log(hit.collider.gameObject.name);
         return hit.collider != null;
     }
 
@@ -68,7 +71,7 @@ public class LifeformMovement : MonoBehaviour
         isWalking = walk;
     }
 
-    private void checkMovement()
+    public virtual void checkMovement()
     {
         animator.SetBool("isWalking", isWalking);
         if (isWalking)
@@ -79,6 +82,7 @@ public class LifeformMovement : MonoBehaviour
                 rigidbody2D.velocity = new Vector2(speed, rigidbody2D.velocity.y);
         }
     }
+
 
 
     private void checkJump()
@@ -98,6 +102,10 @@ public class LifeformMovement : MonoBehaviour
     public void startJump()
     {
         rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, jumpSpeed);
+    }
+    public bool IsJumping()
+    {
+        return isJumping;
     }
 
     private void checkFacing()
@@ -146,4 +154,58 @@ public class LifeformMovement : MonoBehaviour
         this.speed = speed;
     }
 
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
+    public void SetJumpSpeed(float jumpSpeed)
+    {
+        this.jumpSpeed = jumpSpeed;
+    }
+
+    public void SetStepHeightOffset(float step)
+    {
+        stepHeightOffset = step;
+    }
+    public virtual void RelativeMovement(Vector2 target, bool towards)
+    {
+        if (target.x - transform.position.x > 0)
+        {
+            setLifeformDirection(towards? LifeformMovement.LIFEFORM_FACING.LIFEFORM_FACING_RIGHT: LifeformMovement.LIFEFORM_FACING.LIFEFORM_FACING_LEFT);
+        }
+        else
+        {
+            setLifeformDirection(towards? LifeformMovement.LIFEFORM_FACING.LIFEFORM_FACING_LEFT : LifeformMovement.LIFEFORM_FACING.LIFEFORM_FACING_RIGHT);
+        }
+        setWalking(true);
+
+        if (target.y - transform.position.y > 0 && Mathf.Abs(target.x - transform.position.x) < boxCollider2D.size.x * jumpApproximate)
+        {
+            Jump();
+        }
+        else
+        {
+            setJumping(false);
+            endJump();
+        }
+    }
+
+    public void Jump()
+    {
+
+        if (!IsJumping() && isGrounded())
+        {
+            setJumping(true);
+            startJump();
+        }
+        else
+        {
+            if (isGrounded())
+            {
+                setJumping(false);
+                endJump();
+            }
+        }
+    }
 }

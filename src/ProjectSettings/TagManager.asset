@@ -6,6 +6,8 @@ TagManager:
   tags:
   - MainCharacter
   - tool
+  - Enemy
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX
@@ -13,11 +15,11 @@ TagManager:
   - 
   - Water
   - UI
+  - Lifeform
+  - 
+  - 
   - InventoryUI
   - UIbutton
-  - 
-  - 
-  - 
   - 
   - 
   - 

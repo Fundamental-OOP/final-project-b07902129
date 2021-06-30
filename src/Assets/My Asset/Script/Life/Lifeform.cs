@@ -13,7 +13,7 @@ abstract public class Lifeform : MonoBehaviour
     private Color originalColor;
     private float flashTime = 0.1f;
     private float prevFlashTime = 0;
-    public bool flash;
+    private bool flash;
 
     public void Awake()
     {
