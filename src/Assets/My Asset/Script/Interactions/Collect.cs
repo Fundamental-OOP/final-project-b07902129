@@ -28,7 +28,7 @@ namespace Interactions
         public override bool Trigger()
         {
             if (collide && click)
-            { 
+            {
                 if(collectTool.Count == 0) //dont require tool to collect
                 {
                     click = false;

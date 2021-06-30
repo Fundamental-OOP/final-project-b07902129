@@ -52,7 +52,7 @@ public class LifeformMovement : MonoBehaviour
     }
 
     public bool isGrounded() {
-        int mask = ~(LayerMask.GetMask("Lifeform") | LayerMask.GetMask("Ignore Raycast"));
+        int mask = ~(LayerMask.GetMask("MainCharacter") | LayerMask.GetMask("Ignore Raycast"));
         RaycastHit2D hit = Physics2D.Raycast(boxCollider2D.bounds.center, Vector2.down, boxCollider2D.bounds.extents.y + isGroundedOffst, mask);
         Debug.DrawRay(boxCollider2D.bounds.center, Vector2.down * boxCollider2D.bounds.extents.y, Color.red, 1);
         //if (hit.collider != null)

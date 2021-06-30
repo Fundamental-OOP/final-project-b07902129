@@ -5,6 +5,7 @@ abstract public class Lifeform : MonoBehaviour
 {
     protected int lifeformLayer = 6;
     public int health;
+    public int maxHealth = 100;
     protected GameObject[] equippedDrops = new GameObject[2];
 
     abstract public void UseEquippedDrop(int id);
@@ -17,6 +18,7 @@ abstract public class Lifeform : MonoBehaviour
 
     public void Awake()
     {
+        health = maxHealth;
         flash = false;
         originalColor = gameObject.GetComponent<SpriteRenderer>().color;
     }
@@ -30,8 +32,11 @@ abstract public class Lifeform : MonoBehaviour
         }
     }
     public void AddToHealth(int amount) {
-        health += amount;
-        if(amount < 0)
+        if (health + amount > maxHealth)
+            health = maxHealth;
+        else
+            health += amount;
+        if (amount < 0)
         {
             OnDamage();
         }

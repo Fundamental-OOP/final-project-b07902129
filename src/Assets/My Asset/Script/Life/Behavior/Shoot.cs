@@ -13,7 +13,7 @@ namespace Behaviors
         public float projectileSpeed = 10f;
         public float projectileExistTime = 5f;
         private float previousShootTime = -100f;
-        private float scale = 5f;
+        public float scale = 5f;
         private Dictionary <GameObject,float> projectileSpawnTime;
 
         void Awake()
