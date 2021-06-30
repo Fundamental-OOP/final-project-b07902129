@@ -7,7 +7,7 @@ using System;
 
 namespace Enemies
 {
-    abstract public class Enemy : Lifeform
+    public class Enemy : Lifeform
     {
 
         public ABehavior defaultMovement;

@@ -6,7 +6,7 @@ using Interactions;
 namespace Enemies
 {
     [RequireComponent(typeof(Dropper))]
-    public class Slime : Enemy
+    public class DropEnemy : Enemy
     {
         /*new void Awake()
         {
