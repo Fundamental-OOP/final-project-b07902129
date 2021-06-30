@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Behaviors;
-
+using Interactions;
 namespace Enemies
 {
+    [RequireComponent(typeof(Dropper))]
     public class Slime : Enemy
     {
         /*new void Awake()
@@ -22,6 +23,11 @@ namespace Enemies
         {
             behavior = behaviors[0]; 
         }*/
+        override public void Death()
+        {
+            GetComponent<Dropper>().Drop();
+            gameObject.SetActive(false);
+        }
         override public void UseEquippedDrop(int id)
         {
             equippedDrops[id].GetComponent<Drops>().SingleUse();
