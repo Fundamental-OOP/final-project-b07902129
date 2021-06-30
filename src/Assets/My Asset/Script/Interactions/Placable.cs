@@ -8,17 +8,19 @@ namespace Interactions
     public class Placable : MonoBehaviour
     {
         public GameObject placedObject;
+        public GameObject player;
         public Vector3 offset = new Vector3(0, 0, 0);
-        public Player player;
+
 
         void Start()
         {
-            player = GameObject.Find("MainCharacter").GetComponent(typeof(Player)) as Player;
+            player = GameObject.Find("MainCharacter");
             ///placedObject.SetActive(false);
         }
 
         public void Place()
         {
+            Debug.Log("place?");
             ///Instantiate(placedObject);
             GameObject newObject =  Instantiate(placedObject,PlacePos(), Quaternion.identity) as GameObject;
             newObject.SetActive(true);
@@ -26,7 +28,7 @@ namespace Interactions
 
         Vector3 PlacePos()
         {
-            return player.GetPos() + offset;
+            return player.transform.position + offset;
         }
     }
 }

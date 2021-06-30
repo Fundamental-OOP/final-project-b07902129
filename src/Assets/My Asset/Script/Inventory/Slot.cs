@@ -22,7 +22,13 @@ public class Slot : MonoBehaviour, IDropHandler
         nonTransparent = new Color(1f, 1f, 1f, 1f);
         SetImageColor();
     }
-
+    void Update()
+    {
+        if (IsEmpty())
+        {
+            SetItemEmpty();
+        }
+    }
     protected void SetImageColor() {
         if (image.sprite == null)
             image.color = transparent;

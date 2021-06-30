@@ -11,13 +11,25 @@ public class UsableSlot : Slot
     // drops onEquipped initialization
     protected override void OnDropCallBack() {
         drop.OnEquipped();
-        item.SetActive(true);
+        if(item.GetComponent<ObjectFollower>() != null)
+        {
+            item.SetActive(true);
+        }
+        
         OverrideFollowerOffset();
     }
 
     public override void SetItem(GameObject item)
     {
-        item.SetActive(true);
+        if (item.GetComponent<ObjectFollower>() != null)
+        {
+            item.SetActive(true);
+        }
+        else
+        {
+            item.SetActive(false);
+        }
+       
         draggable.enabled = true;
         this.item = item;
         drop = item.GetComponent<Drops>();

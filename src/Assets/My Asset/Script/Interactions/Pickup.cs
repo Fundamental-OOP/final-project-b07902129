@@ -43,8 +43,14 @@ namespace Interactions
 
         void  OnTriggerEnter2D(Collider2D col)
         {
-            Debug.Log("enter collision");
             if (ColliderIsPlayer(col))
+            {
+                trigger = true;
+            }
+        }
+        void OnCollisionEnter2D(Collision2D col)
+        {
+            if (col.gameObject.name.Equals("MainCharacter"))
             {
                 trigger = true;
             }

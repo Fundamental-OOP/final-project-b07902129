@@ -92,5 +92,21 @@ namespace Interactions
                 collide = false;
             }
         }
+
+        void OnCollisionEnter2D(Collision2D col)
+        {
+            if (col.gameObject.name.Equals("MainCharacter"))
+            {
+                collide = true;
+            }
+        }
+
+        void OnCollisionExit2D(Collision2D col)
+        {
+            if (col.gameObject.name.Equals("MainCharacter"))
+            {
+                collide = false;
+            }
+        }
     }
 }

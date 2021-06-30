@@ -25,7 +25,12 @@ public class Inventory : MonoBehaviour
             if (HandSlotList[i].IsEmpty())
             {
                 HandSlotList[i].SetItem(item);
-                item.SetActive(true);
+                if (item.GetComponent<ObjectFollower>() != null)
+                {
+                    item.SetActive(true);
+                }
+
+                //item.SetActive(true);
                 return true;
             }
         }
@@ -34,8 +39,9 @@ public class Inventory : MonoBehaviour
         {
             if(SlotList[i].IsEmpty())
             {
-                SlotList[i].SetItem(item);
                 item.SetActive(false);
+                SlotList[i].SetItem(item);
+                
                 return true;
             }
         }
