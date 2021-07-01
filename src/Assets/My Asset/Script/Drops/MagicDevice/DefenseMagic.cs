@@ -15,6 +15,7 @@ public class DefenseMagic : AMagicDevice
         lid = transform.Find("LightIntensityDetector").gameObject.GetComponent<LightIntensityDetector>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         follower = gameObject.GetComponent<ObjectFollower>();
+        follower.target = GameObject.Find("MainCharacter");
         coolDown = 10;
         coolDownTimer = coolDown;
         requiredLightIntensity = 0.3f;

@@ -17,6 +17,7 @@ public class BulletMagic : AMagicDevice
         coolDown = 1.0f;
         animator = GetComponent<Animator>();
         follower = GetComponent<ObjectFollower>();
+        follower.target = GameObject.Find("MainCharacter");
         coolDownTimer = coolDown + 1;
         requiredLightIntensity = 0.5f;
     }
@@ -41,6 +42,7 @@ public class BulletMagic : AMagicDevice
 
     private void InstantiateBullet(Vector3 direction, float angle) {
         GameObject bullet = Instantiate( projectile );
+        bullet.transform.name = bullet.transform.name.Replace("(Clone)", "").Trim();
         bullet.GetComponent<AProjectile>().SetDirection(direction);
         bullet.GetComponent<AProjectile>().SetVelocity(2.0f);
         bullet.transform.Rotate(0, 0, angle);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LifeForm;
 
-namespace Interactions 
+namespace Interactions
 {
     public class Placable : MonoBehaviour
     {
@@ -23,6 +23,7 @@ namespace Interactions
             Debug.Log("place?");
             ///Instantiate(placedObject);
             GameObject newObject =  Instantiate(placedObject,PlacePos(), Quaternion.identity) as GameObject;
+            newObject.transform.name = newObject.transform.name.Replace("(Clone)", "").Trim();
             newObject.SetActive(true);
         }
 

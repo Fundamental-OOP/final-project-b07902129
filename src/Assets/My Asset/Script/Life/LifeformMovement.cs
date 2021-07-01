@@ -16,9 +16,9 @@ public class LifeformMovement : MonoBehaviour
     protected new Rigidbody2D rigidbody2D;
     protected BoxCollider2D boxCollider2D;
 
-    private float speed = 3f;
-    private float jumpSpeed = 6.5f;
-    private float stepHeightOffset = 0.1f;
+    public float speed = 3f;
+    public float jumpSpeed = 6.5f;
+    public float stepHeightOffset = 0.1f;
     private bool isWalking = false;
     private bool isJumping = false;
     private Animator animator;

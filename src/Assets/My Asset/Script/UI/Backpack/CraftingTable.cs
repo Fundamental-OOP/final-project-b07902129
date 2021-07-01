@@ -27,6 +27,10 @@ public class CraftingTable : MonoBehaviour {
     private void LoadFormulas() {
         formulas = new List<AFormula>();
         formulas.Add(new BulletMagicFormula());
+        formulas.Add(new LightSaverFormula());
+        formulas.Add(new DefenseCircleFormula());
+        formulas.Add(new PickaxeFormula());
+        formulas.Add(new PickaxeLv2Formula());
     }
 
     void Update() {
@@ -69,6 +73,7 @@ public class CraftingTable : MonoBehaviour {
         var craftedObject = Instantiate(craftsPrefabs[formulas[formulaID].GetName()]);
         // craftedObject.transform.position = slots[0].gameObject.transform.position;
         // craftedObject.transform.SetParent(slots[0].gameObject.transform);
+        craftedObject.transform.name = craftedObject.transform.name.Replace("(Clone)", "").Trim();
         slots[0].SetItem(craftedObject);
         craftedObject.SetActive(false);
     }

@@ -24,15 +24,15 @@ namespace Interactions
             if (forward)
             {
                 transform.position = Vector3.MoveTowards(transform.position, destination, moveRate * Time.deltaTime);
-                if(Vector3.Distance(transform.position, destination) < 1f)
+                if(Vector3.Distance(transform.position, destination) < .1f)
                 {
-                    move = false; 
+                    move = false;
                 }
             }
             else
             {
                 transform.position = Vector3.MoveTowards(transform.position, origin, moveRate * Time.deltaTime);
-                if (Vector3.Distance(transform.position,origin) < 1f )
+                if (Vector3.Distance(transform.position,origin) < .1f )
                 {
                     move = false;
                 }
@@ -40,7 +40,7 @@ namespace Interactions
         }
 
         public override void Interact()
-        {    
+        {
             forward = !forward;
             move =  true;
         }

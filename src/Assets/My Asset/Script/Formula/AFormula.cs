@@ -11,7 +11,7 @@ abstract public class AFormula {
                 return false;
             if (drops[i] == null && dropNames[i] == string.Empty)
                 continue;
-            else if (drops[i].name == dropNames[i])
+            else if (drops[i] != null && (drops[i].name == dropNames[i]))
                 continue;
             else
                 return false;
