@@ -97,4 +97,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 2665fd679eac88b4ea16df9943d50008, type: 3}
   host: {fileID: 0}
-  healAmount: 50
+  healAmount: 300

@@ -4,7 +4,7 @@ using Interactions;
 public class Potion : Drops
 {
     public Lifeform host;
-    public int healAmount = 50;
+    public int healAmount = 300;
     // fire once when usableslot is pressed
 
     void Awake() {
