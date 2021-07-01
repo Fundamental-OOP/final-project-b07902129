@@ -16,11 +16,12 @@ namespace Interactions
         public void Drop()
         {
             GameObject newObject = Instantiate(droppedObject, DropPos(), Quaternion.identity) as GameObject;
+            newObject.transform.name = newObject.transform.name.Replace("(Clone)", "").Trim();
             newObject.SetActive(true);
         }
         Vector3 DropPos()
         {
-            return gameObject.transform.position + (Vector3)RandomUnitVector(); 
+            return gameObject.transform.position + (Vector3)RandomUnitVector();
         }
         private Vector2 RandomUnitVector()
         {

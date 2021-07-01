@@ -11,10 +11,13 @@ public class LightSaverMagic : AMagicDevice {
     public float save;
     public bool isActive;
     public bool isUsing;
+    private ObjectFollower follower;
 
     void Awake() {
         lid = transform.Find("LightIntensityDetector").gameObject.GetComponent<LightIntensityDetector>();
         light2D = gameObject.transform.Find("Light").GetComponent<Light2D>();
+        follower = gameObject.GetComponent<ObjectFollower>();
+        follower.target = GameObject.Find("MainCharacter");
         requiredLightIntensity = 0.5f;
         isActive = false;
         isUsing = false;

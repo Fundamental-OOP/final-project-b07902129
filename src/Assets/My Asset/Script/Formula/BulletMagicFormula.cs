@@ -6,9 +6,10 @@ public class BulletMagicFormula : AFormula {
         dropNames = new List<string>(9);
         for (int i = 0; i < 9; i++)
             dropNames.Add(string.Empty);
-        dropNames[1] = "BulletMagic";
-        dropNames[3] = "BulletMagic1";
-        dropNames[5] = "BulletMagic2";
-        dropNames[7] = "BulletMagic3";
+        dropNames[0] = "Crystal_Purple";
+        dropNames[1] = "DarkRock";
+        dropNames[3] = "DarkRock";
+        dropNames[5] = "DarkRock";
+        dropNames[7] = "DarkRock";
     }
 }

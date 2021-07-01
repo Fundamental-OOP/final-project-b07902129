@@ -9,6 +9,8 @@ TagManager:
   - MagicDevice
   - EnemyFire
   - Enemy
+  - Pickaxe
+  - PickaxeLv2
   layers:
   - Default
   - TransparentFX
