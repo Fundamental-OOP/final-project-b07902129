@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class DeathUI : ACanvas
 {
-    public AButton restart;
     public List<ACanvas> canvases;
 
     void Awake() {
@@ -16,18 +15,11 @@ public class DeathUI : ACanvas
 
     void Update() {
         Fade();
-        if (restart.IsPressed()) {
-            restartGame();
-        }
     }
     public void OpenDeathMenu() {
         for (int i = 0; i < canvases.Count; i++) {
             canvases[i].PauseCanvas();
         }
         ActivateCanvas();
-    }
-
-    void restartGame() {
-        Application.LoadLevel(Application.loadedLevel);
     }
 }

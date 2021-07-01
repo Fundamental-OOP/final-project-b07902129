@@ -73,7 +73,11 @@ public class LifeformMovement : MonoBehaviour
 
     public virtual void checkMovement()
     {
-        animator.SetBool("isWalking", isWalking);
+        if (animator != null)
+        {
+            animator.SetBool("isWalking", isWalking);
+        }
+
         if (isWalking)
         {
             if (currentDirection == LIFEFORM_FACING.LIFEFORM_FACING_LEFT)
@@ -88,7 +92,7 @@ public class LifeformMovement : MonoBehaviour
     private void checkJump()
     {
         Debug.Log(isGrounded());
-        if (isJumping && isGrounded())
+        if (isJumping && isGrounded() && animator != null)
         {
             animator.SetBool("isJumping", isJumping);
         }
@@ -96,7 +100,10 @@ public class LifeformMovement : MonoBehaviour
 
     public void endJump()
     {
-        animator.SetBool("isJumping", false);
+        if (animator != null)
+        {
+            animator.SetBool("isJumping", false);
+        }
     }
 
     public void startJump()

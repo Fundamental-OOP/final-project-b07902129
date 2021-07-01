@@ -92,7 +92,6 @@ GameObject:
   - component: {fileID: 301851760987889961}
   - component: {fileID: 301851760987889960}
   - component: {fileID: 301851760987889963}
-  - component: {fileID: 301851760987889962}
   - component: {fileID: 301851760987889957}
   - component: {fileID: 4035669094788525754}
   m_Layer: 2
@@ -251,25 +250,6 @@ MonoBehaviour:
   speed: 3
   jumpSpeed: 6.5
   stepHeightOffset: 0.1
---- !u!95 &301851760987889962
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301851760987889959}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &301851760987889957
 MonoBehaviour:
   m_ObjectHideFlags: 0
