@@ -25,4 +25,8 @@ abstract public class AMagicDevice : Drops
     public bool MeetLightIntensity() {
         return lid.DetectLightIntensity() > requiredLightIntensity;
     }
+    public float GetLightIntensity()
+    {
+        return lid.DetectLightIntensity();
+    }
 }
