@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class MainCharacter : Lifeform
 {
+    public GameObject deathScene;
+    override public void Death()
+    {
+        gameObject.SetActive(false);
+        deathScene.SetActive(true);
+    }
     override public void UseEquippedDrop(int id) {
         equippedDrops[id].GetComponent<Drops>().SingleUse();
     }
