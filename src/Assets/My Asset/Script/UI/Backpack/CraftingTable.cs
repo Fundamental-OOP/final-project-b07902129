@@ -32,6 +32,7 @@ public class CraftingTable : MonoBehaviour {
         formulas.Add(new PickaxeFormula());
         formulas.Add(new PickaxeLv2Formula());
         formulas.Add(new HolyPotionFormula());
+        formulas.Add(new LifePotionFormula());
     }
 
     void Update() {

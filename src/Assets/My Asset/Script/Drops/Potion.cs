@@ -6,6 +6,10 @@ public class Potion : Drops
     public Lifeform host;
     public int healAmount = 50;
     // fire once when usableslot is pressed
+
+    void Awake() {
+        host = GameObject.Find("MainCharacter").gameObject.GetComponent<MainCharacter>();
+    }
     override public void SingleUse()
     {
         host.AddToHealth(healAmount);

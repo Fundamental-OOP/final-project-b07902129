@@ -2,16 +2,15 @@ using UnityEngine;
 
 public class MainCharacter : Lifeform
 {
-    public GameObject deathScene;
+    public DeathUI deathScene;
     void Start()
     {
-       
-        deathScene.SetActive(false);
+
     }
     override public void Death()
     {
         gameObject.SetActive(false);
-        deathScene.SetActive(true);
+        deathScene.OpenDeathMenu();
     }
     override public void UseEquippedDrop(int id) {
         equippedDrops[id].GetComponent<Drops>().SingleUse();

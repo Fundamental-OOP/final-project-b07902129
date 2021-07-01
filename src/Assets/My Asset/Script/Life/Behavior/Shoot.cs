@@ -50,7 +50,7 @@ namespace Behaviors
         {
             GameObject newObject = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
             newObject.transform.name = newObject.transform.name.Replace("(Clone)", "").Trim();
-            newObject.tag = "EnemyProjectile";
+            newObject.tag = "EnemyFire";
             Vector2 direction = target.transform.position - transform.position;
             direction /= direction.magnitude;
             newObject.transform.SetParent(gameObject.transform);
