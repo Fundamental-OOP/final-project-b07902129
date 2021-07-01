@@ -8,9 +8,9 @@ public class Inventory : MonoBehaviour
     public List<Slot> HandSlotList;
     void Start()
     {
-        AddItem(GameObject.Find("LightSaver"));
-        AddItem(GameObject.Find("BulletMagic"));
-        AddItem(GameObject.Find("Defense_Circle"));
+        // AddItem(GameObject.Find("LightSaver"));
+        // AddItem(GameObject.Find("BulletMagic"));
+        // AddItem(GameObject.Find("Defense_Circle"));
     }
 
     void Update()
@@ -34,7 +34,7 @@ public class Inventory : MonoBehaviour
             if(SlotList[i].IsEmpty())
             {
                 SlotList[i].SetItem(item);
-                
+
                 return true;
             }
         }

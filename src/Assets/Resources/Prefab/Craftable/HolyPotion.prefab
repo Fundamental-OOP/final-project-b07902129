@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7289511563600122362}
   - component: {fileID: 4879298092487198888}
-  - component: {fileID: 6526043892394152958}
+  - component: {fileID: 8631713561168859992}
   m_Layer: 0
   m_Name: HolyPotion
   m_TagString: Untagged
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6526043892394152958
+--- !u!114 &8631713561168859992
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,7 +92,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 847188962328623492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9571bd0f495c6de46ba96d1e265eb81b, type: 3}
+  m_Script: {fileID: 11500000, guid: 485dda3acede5cb4a937c57f4aa51aca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: fe85fe52311357d4ab60e0a567dd788c, type: 3}
+  win: {fileID: 0}

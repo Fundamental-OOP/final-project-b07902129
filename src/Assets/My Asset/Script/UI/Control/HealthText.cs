@@ -11,7 +11,6 @@ public class HealthText : MonoBehaviour
     private TextMeshProUGUI text;
     void Start()
     {
-        host = GameObject.Find("MainCharacter").GetComponent<Lifeform>();
         text = GetComponent<TextMeshProUGUI>();
     }
 

@@ -14,7 +14,8 @@ public class ControlUI : ACanvas
 
     void Awake() {
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
-        ActivateCanvas();
+        canvasGroup.alpha = 0;
+        PauseCanvas();
     }
 
     void Update() {

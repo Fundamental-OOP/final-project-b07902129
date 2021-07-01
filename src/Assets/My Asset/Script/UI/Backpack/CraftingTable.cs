@@ -31,6 +31,7 @@ public class CraftingTable : MonoBehaviour {
         formulas.Add(new DefenseCircleFormula());
         formulas.Add(new PickaxeFormula());
         formulas.Add(new PickaxeLv2Formula());
+        formulas.Add(new HolyPotionFormula());
     }
 
     void Update() {
@@ -59,7 +60,7 @@ public class CraftingTable : MonoBehaviour {
             if (formulas[i].IsMatched(onTableObjects))
                 return i;
         }
-           
+
         return -1;
     }
 

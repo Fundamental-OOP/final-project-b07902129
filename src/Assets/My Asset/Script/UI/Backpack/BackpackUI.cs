@@ -13,8 +13,8 @@ public class BackpackUI : ACanvas
 
     void Awake() {
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
-        canvasGroup.interactable = false;
-        canvasGroup.alpha = 0.0f;
+        canvasGroup.alpha = 0;
+        PauseCanvas();
     }
 
     void Update() {

@@ -7,7 +7,8 @@ public class UsableSlotUI : ACanvas
 {
     void Awake() {
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
-        ActivateCanvas();
+        canvasGroup.alpha = 0;
+        PauseCanvas();
     }
 
     void Update() {
