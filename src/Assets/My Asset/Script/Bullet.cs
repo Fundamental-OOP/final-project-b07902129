@@ -28,11 +28,21 @@ public class Bullet : AProjectile
         transform.position += velocity * Time.deltaTime * direction;
     }
 
-    public void OnTriggerEnter2D(Collider2D collider) {
-        if (collider.gameObject.tag == "MainCharacter" || collider.gameObject.layer == 8)
-            return;
-        LoadExplosion();
-        Destroy(gameObject);
+    public void OnCollisionEnter2D(Collision2D collider) {
+        if (collider.gameObject.tag == "Enemy")
+        {
+            LoadExplosion();
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Enemy")
+        {
+            LoadExplosion();
+        }
+           
+        
     }
 
     private void LoadExplosion() {

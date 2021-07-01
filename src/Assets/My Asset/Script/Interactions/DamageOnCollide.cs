@@ -30,17 +30,23 @@ namespace Interactions
             {
                 if (Time.time - victims[victim] > damageInterval)
                 {
-                    victim.GetComponent<Lifeform>().AddToHealth(-damageValue);
-                    victims[victim] = Time.time;
+                    Damage(victim);
                 }
             }
             else
             {
                 victims.Add(victim, Time.time);
-                victim.GetComponent<Lifeform>().AddToHealth(-damageValue);
+                Damage(victim);
+                
             }
         }
-
+        private void Damage(GameObject victim)
+        {
+            victims[victim] = Time.time;
+            victim.GetComponent<Lifeform>().AddToHealth(-damageValue);
+            if (destroyOnCollide)
+                gameObject.SetActive(false);
+        }
         public override bool Trigger()  //direct call interact
         {
             for(int i = 0; i <  colliders.Count;i++)

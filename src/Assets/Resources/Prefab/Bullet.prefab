@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 5702786476787609033}
   - component: {fileID: 819283687207509333}
   - component: {fileID: 7460157788241264411}
+  - component: {fileID: 8607547886883328146}
   m_Layer: 8
   m_Name: Bullet
   m_TagString: MagicDevice
@@ -211,7 +212,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &819283687207509333
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -251,3 +252,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 38360077bc73ce64eba0ed0f6f1d3a70, type: 3}
+--- !u!114 &8607547886883328146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6281455889275916407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e592c5351d76e1459314add15282c61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyOnCollide: 1
+  damageInterval: 1
+  damageValue: 10
+  damageTargetTags:
+  - Enemy
