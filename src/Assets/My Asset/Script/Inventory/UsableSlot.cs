@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class UsableSlot : Slot
 {
+
+    public GameObject mainCharacter;
     public LightIntensityDetector lightIntensityDetector;
     public Vector3 objectOffsetFromCharacter;
 
@@ -15,16 +17,12 @@ public class UsableSlot : Slot
         {
             item.SetActive(true);
         }
-        
+
         OverrideFollowerOffset();
     }
 
     public override void SetItem(GameObject item)
     {
-        if(item == null)
-        {
-            return;
-        }
         if (item.GetComponent<ObjectFollower>() != null)
         {
             item.SetActive(true);
@@ -33,7 +31,7 @@ public class UsableSlot : Slot
         {
             item.SetActive(false);
         }
-       
+
         draggable.enabled = true;
         this.item = item;
         drop = item.GetComponent<Drops>();
@@ -43,7 +41,10 @@ public class UsableSlot : Slot
 
     private void OverrideFollowerOffset() {
         ObjectFollower of = item.GetComponent<ObjectFollower>();
-        if (of != null && of.GetTarget().tag == "MainCharacter")
+        if (of != null && of.GetTarget().tag == "MainCharacter") {
             of.SetOffset(objectOffsetFromCharacter);
+            item.transform.position = mainCharacter.transform.position + objectOffsetFromCharacter;
+        }
+
     }
 }

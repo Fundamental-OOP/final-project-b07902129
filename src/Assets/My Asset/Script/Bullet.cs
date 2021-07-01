@@ -29,20 +29,22 @@ public class Bullet : AProjectile
     }
 
     public void OnCollisionEnter2D(Collision2D collider) {
-        if (collider.gameObject.tag == "Enemy")
+        if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Building")
         {
             LoadExplosion();
+            Destroy(gameObject);
         }
     }
 
     public void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Enemy")
+        if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Building")
         {
             LoadExplosion();
+            Destroy(gameObject);
         }
-           
-        
+
+
     }
 
     private void LoadExplosion() {

@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 0dd2c0c5af8b59c4b8844050812b0df5, type: 3}
+  bulletVelocity: 10
 --- !u!1001 &2411961085638520663
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 523558151652015518}
   m_Layer: 0
   m_Name: floor 1
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,4 +135,4 @@ MonoBehaviour:
   - {x: -2.418354, y: 0.016943917, z: 0}
   m_ShapePathHash: -1407319019
   m_Mesh: {fileID: 0}
-  m_InstanceId: -117218
+  m_InstanceId: 65652

@@ -10,6 +10,7 @@ public class BulletMagic : AMagicDevice
     private Animator animator;
     private ObjectFollower follower;
     private bool isActive = false;
+    public float bulletVelocity = 10f;
 
     void Awake() {
         lid = transform.Find("LightIntensityDetector").gameObject.GetComponent<LightIntensityDetector>();
@@ -44,7 +45,7 @@ public class BulletMagic : AMagicDevice
         GameObject bullet = Instantiate( projectile );
         bullet.transform.name = bullet.transform.name.Replace("(Clone)", "").Trim();
         bullet.GetComponent<AProjectile>().SetDirection(direction);
-        bullet.GetComponent<AProjectile>().SetVelocity(2.0f);
+        bullet.GetComponent<AProjectile>().SetVelocity(bulletVelocity);
         bullet.transform.Rotate(0, 0, angle);
         bullet.transform.position = transform.position;
     }

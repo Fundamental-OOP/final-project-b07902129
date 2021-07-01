@@ -266,6 +266,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnCollide: 1
   damageInterval: 1
-  damageValue: 10
+  damageValue: 50
   damageTargetTags:
   - Enemy

@@ -11,6 +11,7 @@ public class DefenseCircleFormula : AFormula {
         dropNames[2] = "Crystal_Blue";
         dropNames[3] = "Crystal_Blue";
         dropNames[4] = "Crystal_Blue";
+        dropNames[5] = "Crystal_Blue";
         dropNames[6] = "Crystal_Blue";
         dropNames[7] = "Crystal_Blue";
         dropNames[8] = "Crystal_Blue";

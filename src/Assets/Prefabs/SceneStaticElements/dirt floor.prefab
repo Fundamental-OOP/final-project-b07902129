@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4527473577562364250}
   m_Layer: 9
   m_Name: dirt floor
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,4 +136,4 @@ MonoBehaviour:
   - {x: -3.4120126, y: 0.17075062, z: 0}
   m_ShapePathHash: 1762026774
   m_Mesh: {fileID: 0}
-  m_InstanceId: 54120
+  m_InstanceId: 65706
