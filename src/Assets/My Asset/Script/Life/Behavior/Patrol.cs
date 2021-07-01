@@ -8,6 +8,7 @@ namespace Behaviors
     public class Patrol : ABehavior
     {
         public float speed = 2f;
+        public float closeRange = 1f;
         private List<Vector2> points;
         private int index;
         private Vector2 target;
@@ -26,7 +27,7 @@ namespace Behaviors
         }
         override public void go()
         {
-            if(Vector2.Distance(host.transform.position,target) < 1f) //close enough
+            if(Vector2.Distance(host.transform.position,target) < closeRange) //close enough
             {
                 NextPoint();
             }

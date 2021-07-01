@@ -23,9 +23,14 @@ namespace Enemies
         {
             behavior = behaviors[0]; 
         }*/
+        public int dropAmount = 3;
         override public void Death()
         {
-            GetComponent<Dropper>().Drop();
+            for(int i = 0; i < dropAmount; i++)
+            {
+                GetComponent<Dropper>().Drop();
+            }
+            
             gameObject.SetActive(false);
         }
         override public void UseEquippedDrop(int id)

@@ -7,15 +7,20 @@ using UnityEngine.SceneManagement;
 
 public class Restart : MonoBehaviour
 {
-    void OnMouseDown() 
+
+    void OnPointerDown()
+    {
+        RestartScene();
+    }
+    void OnMouseDown()
     {
         RestartScene();
     }
     public void RestartScene()
     {
-        Application.LoadLevel(Application.loadedLevel);
-        /*Scene thisScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(thisScene.name);*/
+        //Application.LoadLevel(Application.loadedLevel);
+        Scene thisScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(thisScene.name);
     }
 
 }

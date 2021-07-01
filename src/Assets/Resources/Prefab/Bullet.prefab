@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 6281455888672892024}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5056376, y: 2.5056376, z: 2.5056376}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 6281455889275916403}
   m_RootOrder: 0
@@ -45,11 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 0.7661966, g: 0.3443396, b: 1, a: 1}
-  m_Intensity: 3.92
+  m_FalloffIntensity: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 27b44317
+  m_ApplyToSortingLayers: 7784fc5ea149b80a7385b9d8dd35862905649ef100000000
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 0.84
+  m_PointLightOuterRadius: 5
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -266,6 +266,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnCollide: 1
   damageInterval: 1
-  damageValue: 50
+  damageValue: 15
   damageTargetTags:
   - Enemy

@@ -3,6 +3,11 @@ using UnityEngine;
 public class MainCharacter : Lifeform
 {
     public GameObject deathScene;
+    void Start()
+    {
+       
+        deathScene.SetActive(false);
+    }
     override public void Death()
     {
         gameObject.SetActive(false);

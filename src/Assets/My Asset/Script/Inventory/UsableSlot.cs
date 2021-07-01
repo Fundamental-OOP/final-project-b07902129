@@ -23,6 +23,8 @@ public class UsableSlot : Slot
 
     public override void SetItem(GameObject item)
     {
+        if (item == null)
+            return;
         if (item.GetComponent<ObjectFollower>() != null)
         {
             item.SetActive(true);

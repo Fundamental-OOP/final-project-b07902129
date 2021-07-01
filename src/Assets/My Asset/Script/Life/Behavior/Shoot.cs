@@ -18,6 +18,7 @@ namespace Behaviors
 
         void Awake()
         {
+            target = GameObject.Find("MainCharacter");
             projectileSpawnTime = new Dictionary<GameObject, float>();
             projectile.SetActive(false);
         }

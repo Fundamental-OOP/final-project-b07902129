@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 301851760769447261}
   - component: {fileID: 301851760769447234}
-  m_Layer: 0
-  m_Name: Default Behavior
+  m_Layer: 2
+  m_Name: Patrol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   host: {fileID: 301851760987889959}
   speed: 2
+  closeRange: 1
 --- !u!1 &301851760844606085
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,7 +57,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 301851760844606090}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: patrol point (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +72,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301851760844606085}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.3, y: -3.7, z: 0}
+  m_LocalPosition: {x: 15.1, y: -5.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 301851760769447261}
@@ -93,7 +94,8 @@ GameObject:
   - component: {fileID: 301851760987889963}
   - component: {fileID: 301851760987889962}
   - component: {fileID: 301851760987889957}
-  m_Layer: 0
+  - component: {fileID: 4035669094788525754}
+  m_Layer: 2
   m_Name: Guarding Slime
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -109,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 301851760987889959}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -16.238888, y: -3.1432033, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 301851761641345234}
   - {fileID: 301851760769447261}
@@ -179,7 +181,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -227,10 +229,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 393
-  defaultMovement: {fileID: 0}
+  maxHealth: 30
+  defaultMovement: {fileID: 301851760769447234}
   movement: {fileID: 0}
-  movementRules: []
+  movementRules:
+  - {fileID: 301851761641345233}
   actionRules: []
+  dropAmount: 3
 --- !u!114 &301851760987889963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +248,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3582cbcd583cf454196cfd869285c7ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 3
+  jumpSpeed: 6.5
+  stepHeightOffset: 0.1
 --- !u!95 &301851760987889962
 Animator:
   serializedVersion: 3
@@ -276,9 +284,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnCollide: 0
   damageInterval: 1
-  damageValue: 1
+  damageValue: 10
   damageTargetTags:
   - MainCharacter
+--- !u!114 &4035669094788525754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301851760987889959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399ecff87125b314ab2d382480636524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droppedObject: {fileID: 4741869695063300675, guid: 91b5b4ebe50f74d4aab6ef899bb71b6b,
+    type: 3}
 --- !u!1 &301851761586994870
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 301851761586994871}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: patrol point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,8 +343,9 @@ GameObject:
   - component: {fileID: 301851761641345233}
   - component: {fileID: 301851761641345232}
   - component: {fileID: 301851761641345235}
-  m_Layer: 0
-  m_Name: 'Behavior '
+  - component: {fileID: 3991450049675986593}
+  m_Layer: 2
+  m_Name: Chase if near
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -385,5 +408,26 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 100, y: 50}
+  m_Size: {x: 200, y: 100}
   m_Direction: 0
+--- !u!50 &3991450049675986593
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301851761641345261}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

@@ -12,6 +12,7 @@ namespace Behaviors
         private LifeformMovement movement;
         void Awake()
         {
+            target = GameObject.Find("MainCharacter");
             movement = host.GetComponent<LifeformMovement>();
         }
         override public void go()

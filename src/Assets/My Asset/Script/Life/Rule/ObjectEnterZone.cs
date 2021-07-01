@@ -13,6 +13,7 @@ namespace Rules
         private bool inZone = false;
         void Awake()
         {
+            target = GameObject.Find("MainCharacter");
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.isKinematic = true;
             Collider2D col = GetComponent<Collider2D>();
