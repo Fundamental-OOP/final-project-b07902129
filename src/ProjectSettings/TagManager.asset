@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - MainCharacter
+  - tool
+  - MagicDevice
+  - EnemyFire
+  - Enemy
+  - Pickaxe
+  - PickaxeLv2
+  - Building
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - MainCharacter
+  - OtherLifeform
+  - Drops
+  - StaticSprite
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 696661469
+    locked: 0
+  - name: Interactive Objects
+    uniqueID: 3636036979
+    locked: 0
+  - name: Player
+    uniqueID: 179849633
+    locked: 0
+  - name: Interactive Objects 2
+    uniqueID: 1593607287
+    locked: 0
+  - name: Foreground
+    uniqueID: 4053689349
+    locked: 0
+  - name: UI Background
+    uniqueID: 1351459661
+    locked: 0
+  - name: UI
+    uniqueID: 2267359243
+    locked: 0
